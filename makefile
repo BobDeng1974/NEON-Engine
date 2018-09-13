@@ -1,0 +1,11 @@
+GLFW_COMMANDS = -lglfw3 -lGL -lX11 -lpthread -lXrandr -lXi -ldl
+
+PROJECT_INCLUDE = -I./src/Graphics -I./src/System -I./src/
+
+build:
+	g++ $(PROJECT_INCLUDE) -o'NEON Engine' src/main.cpp $(GLFW_COMMANDS)
+debug:
+	g++ -Wall -DDEBUG src/glad.c $(PROJECT_INCLUDE) -o'NEON Engine' src/main.cpp $(GLFW_COMMANDS)
+
+test: debug
+	./'NEON Engine'
