@@ -10,8 +10,10 @@ class Engine
 	public:
 		void run();
 
-		inline void initWindow();
-		inline void initGLAD();
+		void initWindow();
+		void initGLAD();
+
+		void initGL();
 
 		void proccessInput(Window* window);
 
