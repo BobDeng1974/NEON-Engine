@@ -17,4 +17,19 @@ struct Vector4
 
 		void normalize();
 		Vector4 normalized();
+
+		Vector4 operator+(const Vector4& vec);
+		Vector4 operator+(const float& value);
+
+		void operator+=(const Vector4& vec);
+		void operator+=(const float& vec);
+
+		Vector4 operator-(const Vector4& vec);
+		Vector4 operator-(const float& value);
+
+		void operator-=(const Vector4& vec);
+		void operator+=(const float& value);
+
+		Vector4 operator*(const float& value);
+		Vector4 operator/(const float& value);
 };

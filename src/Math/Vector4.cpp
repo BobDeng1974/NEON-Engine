@@ -25,7 +25,16 @@ x(x), y(y), z(z), w(w)
 
 }
 
-void Vector4::calculateMagnitude()
-{
+void Vector4::calculateMagnitude() {
 	this->magnitude = sqrt(x * x + y * y + z * z);
+}
+
+void Vector4::normalize() {
+	this->x /= magnitude;
+	this->y /= magnitude;
+	this->z /= magnitude;
+}
+
+Vector4 Vector4::normalized() {
+	return Vector4(this->x / magnitude, this->y / magnitude, this->z / magnitude);
 }

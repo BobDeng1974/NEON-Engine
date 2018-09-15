@@ -35,19 +35,7 @@ struct Array
 			length++;
 		}
 
-		void add(Array<T>& items) {
-			if(length + items.length < size) {
-				
-			}
-		}
-
-		void add(T* items, uint32_t length)
-		{
-
-		}
-
-		void remove(T item)
-		{
+		void remove(T item){
 			for(uint32_t i = 0; i < length; i++)
 			{
 				if(array[i] == item)
@@ -60,7 +48,6 @@ struct Array
 					length--;
 				}
 			}
-
 		}
 
 		void removeAt(uint32_t index) {
