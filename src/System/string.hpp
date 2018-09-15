@@ -15,7 +15,7 @@ struct string
 		string(char* str, uint32_t length);
 
 		bool startsWith(string* token);
-		string* split(char splitter, uint32_t* splitCount);
+		string* split(char splitter, uint32_t& splitCount);
 
 		char* data();
 		char get(std::size_t index);

@@ -5,7 +5,6 @@
 #include <iostream>
 
 #include "Window.h"
-#include "Debug.h"
 
 void Window::initWindow(uint32_t width, uint32_t height)
 {
@@ -18,7 +17,7 @@ void Window::initWindow(uint32_t width, uint32_t height)
 	window = glfwCreateWindow(width, height, "NEON Engine", nullptr, nullptr);
 	if(window == NULL)
 	{
-		Debug::Error("Couldn't create GLFW Window!");
+		//Debug::Error("Couldn't create GLFW Window!");
 		glfwTerminate();
 	}
 
