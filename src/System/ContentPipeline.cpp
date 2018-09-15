@@ -1,51 +1,40 @@
-#include "ContentPipeline.h"
+/*#include "ContentPipeline.h"
 #include "Debug.h"
 
 #include <iostream>
+#include <vector>
+#include <Vector4.cpp>
 
 Mesh ContentPipeline::LoadOBJ(char* path)
 {
-	Debug::Message("Loading OBJ!");
-	Debug::Warning("Path is ");
-	std::cout << path;
+	std::ifstream file;
+	file.open(path);
 
-	Array<float> vertices(100);
-	Array<uint32_t> indices(100);
+	if(file.is_open())
+		Debug::Error("File couldn't be opened!");
 
-	char* line;
+	std::vector<Vector4> vertices;
+	std::vector<uint32_t> indices;
 
-	std::ifstream stream(path);
-	while(!stream.eof())
+	std::string line;
+	while(std::getline(file, line))
 	{
-		uint32_t length = 0;
-		line = File::readLine(&stream, &length);
-		char** splits = String::Split(line, length, ' ', nullptr);
+		uint32_t splitCount = 0;
+		std::string* splits = String::Split(line, line.length, ' ', &splitCount);
 
 		// Vertices
 		if(strcmp(splits[0], "v"))
+			vertices.insert(vertices.begin, Vector4(std::stof(splits[1]), std::stof(splits[2]), std::stof(splits[3])));
+		// Faces
+		else if(strcmp(splits[1], "f"))
 		{
-			for(int i = 1; i <= 3; i++)
-				vertices.Add(std::stof(splits[i]));
-		}
-
-		else if(strcmp(splits[0], "f"))
-		{
-			for(int i = 1; i <= 3; i++)
+			for(uint32_t i = 1; i <= 3; i++)
 			{
-				uint32_t splitCount = 0;
-				char** faces = String::Split(splits[i], strlen(splits[i]), '/', &splitCount);
-				if(splitCount > 0)
-					indices.Add(std::stoi(faces[0]));
+				uint32_t count = 0;
+				char** faces = String::Split()
 			}
 		}
 	}
-
-	Mesh mesh(nullptr, nullptr, 0, 0);
-	vertices.copy(mesh.vertices);
-	delete &vertices;
-
-	indices.copy(mesh.indices);
-	delete &indices;
 }
 
 char* loadShader(char* path)
@@ -61,4 +50,4 @@ char* loadShader(char* path)
 	file.close();
 
 	return shader;
-}
+}*/

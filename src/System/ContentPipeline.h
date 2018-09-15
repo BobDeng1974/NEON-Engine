@@ -5,7 +5,6 @@
 #include <cstring>
 
 #include "String.h"
-#include "File.cpp"
 #include "Mesh.h"
 
 namespace ContentPipeline

@@ -7,7 +7,6 @@
 #include "Engine.h"
 #include "Debug.h"
 #include "Mesh.cpp"
-#include "ContentPipeline.cpp"
 
 uint32_t indiceCount = 0;
 
@@ -19,10 +18,12 @@ void Engine::run()
 	initGLAD();
 
 	Debug::Message("Initializing OpenGL!");
-	initGL();
+	//initGL();
 
+	Debug::Message("Viewport Created!");
 	glViewport(0, 0, WIDTH, HEIGHT);
 
+	Debug::Message("Main loop entered!");
 	mainLoop();
 	cleanup();
 }
@@ -40,10 +41,10 @@ void Engine::initGLAD()
 	std::cout << "pepa";
 }
 
-void Engine::initGL()
+/*void Engine::initGL()
 {
-	Mesh mesh = ContentPipeline::LoadOBJ("/home/martin/Desktop/cube.obj");
-	indiceCount = mesh.indiceCount;
+	//Mesh mesh = ContentPipeline::LoadOBJ("../home/martin/Desktop/cube.obj");
+	//indiceCount = mesh.indiceCount;
 
 	if(mesh.verticeCount == 0)
 		Debug::Warning("Vertice count is zero!");
@@ -65,7 +66,7 @@ void Engine::initGL()
 
 	glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 3 * sizeof(float), 0);
 	glEnableVertexAttribArray(0);
-}
+}*/
 
 void Engine::framebuffer_size_callback(GLFWwindow* window, int width, int height)
 {
