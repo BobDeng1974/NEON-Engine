@@ -23,17 +23,12 @@ struct Array
 			length = 0;
 		}
 
-		void Allocate(size_t count)
-		{
-
-		}
-
 		void Add(T item)
 		{
 			if(size == length)
 			{
 				size += 10;
-				realloc(array, size);
+				array = realloc(array, size);
 
 				array[length] = item;
 			}	else
@@ -41,14 +36,61 @@ struct Array
 
 			length++;
 		}
-		void Add(Array<T> items);
-		void Add(T* items, uint32_t length);
 
-		bool Remove(T item);
-		bool RemoveAt(uint32_t index);
+		void add(Array<T>& items) {
+			if(length + items.length < size) {
+				
+			}
+		}
 
-		void copy(T* destination)
+		void add(T* items, uint32_t length)
 		{
-			memcpy(destination, array, length * sizeof(T));
+
+		}
+
+		void remove(T item)
+		{
+			for(uint32_t i = 0; i < length; i++)
+			{
+				if(array[i] == item)
+				{
+					if(i < length - 1)
+						memcpy(array + i, array + i + 1, sizeof(T) * (length - i - 1));
+					else
+						array[length - 1] = nullptr;
+
+					length--;
+				}
+			}
+
+		}
+
+		void removeAt(uint32_t index) {
+			if(index >= length)
+				return;
+
+			if(index < length - 1)
+				memcpy(array + index, array + index + 1, length - index - 1);
+
+			length--;
+			array[length - 1] = nullptr;
+		}
+
+		T* trim(uint32_t index) {
+			T trims = new T[2];
+			memcpy(trims[0], array, index * sizeof(T));
+			memcpy(trims[1], array + index, length - index);
+		}
+
+		void copy(T* destination) {
+			memcpy(destination, &array, length * sizeof(T));
+		}
+
+		void copy(T* destination, uint32_t length) {
+			memcpy(destination, &array, length * sizeof(T));
+		}
+
+		T& operator[](std::size_t index) {
+			return array[index];
 		}
 };

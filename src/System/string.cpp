@@ -13,8 +13,11 @@ size(size), length(0.0f) {
 }
 
 string::string(char str[]) :
-characters(str), length(28), size(28) {
+characters(str) {
+	uint32_t lgt = getLength();
 
+	length = lgt;
+	size = lgt;
 }
 
 string::string(char* str, uint32_t length) :
@@ -74,6 +77,20 @@ char string::get(std::size_t index){
 	return this->characters[index];
 }
 
+string string::operator+(const string& str) {
+	string newString(this->length + str.length);
+	memcpy(&newString.characters, this->characters, this->length * sizeof(char));
+	memcpy(&newString + this->length, str.characters, str.length);
+}
+
 char& string::operator[](std::size_t index) {
 	return this->characters[index]; 
+}
+
+bool string::operator==(string& str) const {
+	for(uint32_t i = 0; i < length; i++)
+		if(str[i] != this->characters[i])
+			return false;
+
+	return true;
 }
