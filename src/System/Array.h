@@ -23,16 +23,14 @@ struct Array
 			length = 0;
 		}
 
-		void Add(T item)
+		void add(const T item)
 		{
 			if(size == length)
 			{
 				size += 10;
-				array = realloc(array, size);
-
-				array[length] = item;
-			}	else
-				array[length] = item;
+				array = (T*)realloc(array, size);
+			}
+			array[length] = item;
 
 			length++;
 		}
@@ -70,10 +68,18 @@ struct Array
 				return;
 
 			if(index < length - 1)
-				memcpy(array + index, array + index + 1, length - index - 1);
+				memcpy(array + index, array + index + 1, (length - index - 1) * sizeof(T));
 
+			array[length - 1] = NULL;
 			length--;
-			array[length - 1] = nullptr;
+		}
+
+		bool contains(T item) {
+			for(uint32_t i = 0; i < length; i++)
+				if(array[i] == item)
+					return true;
+
+			return false;
 		}
 
 		T* trim(uint32_t index) {

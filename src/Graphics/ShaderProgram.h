@@ -3,12 +3,12 @@
 
 #include <glad/glad.h>
 
-#include "Array"
+#include "Array.h"
 
 struct ShaderProgram
 {
 	private:
-		Array shaders;
+		Array<uint32_t> shaders;
 		uint32_t program;
 
 	public:

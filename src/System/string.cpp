@@ -77,6 +77,12 @@ char string::get(std::size_t index){
 	return this->characters[index];
 }
 
+uint32_t string::getLength() {
+	for(int i = 0; ; i++)
+		if(this->characters[i] == '\0')
+			return i;
+}
+
 string string::operator+(const string& str) {
 	string newString(this->length + str.length);
 	memcpy(&newString.characters, this->characters, this->length * sizeof(char));
