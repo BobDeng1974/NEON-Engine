@@ -1,4 +1,4 @@
-/*#include "ContentPipeline.h"
+#include "ContentPipeline.h"
 #include "Debug.h"
 
 #include <iostream>
@@ -50,4 +50,4 @@ char* loadShader(char* path)
 	file.close();
 
 	return shader;
-}*/
+}

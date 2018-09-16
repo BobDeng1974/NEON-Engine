@@ -7,8 +7,11 @@
 #include "Engine.h"
 #include "Debug.h"
 #include "Mesh.cpp"
+#include "ShaderProgram.cpp"
+#include "ContentPipeline.cpp"
 
 uint32_t indiceCount = 0;
+uint32_t VAO = 0;
 
 void Engine::run()
 {
@@ -18,7 +21,7 @@ void Engine::run()
 	initGLAD();
 
 	Debug::Message("Initializing OpenGL!");
-	//initGL();
+	initGL();
 
 	Debug::Message("Viewport Created!");
 	glViewport(0, 0, WIDTH, HEIGHT);
@@ -41,17 +44,23 @@ void Engine::initGLAD()
 	std::cout << "pepa";
 }
 
-/*void Engine::initGL()
+void Engine::initGL()
 {
-	//Mesh mesh = ContentPipeline::LoadOBJ("../home/martin/Desktop/cube.obj");
-	//indiceCount = mesh.indiceCount;
+	ShaderProgram shaders;
+	shaders.addShader(GL_VERTEX_SHADER, ContentPipeline::LoadOBJ(__ASSETS__ + "/Shaders/defaultVertexShader.glsl"));
 
-	if(mesh.verticeCount == 0)
-		Debug::Warning("Vertice count is zero!");
-	if(mesh.indiceCount == 0)
-		Debug::Warning("Indice count is zero!");
+	float vertices[] = {
+         0.5f,  0.5f, 0.0f,  // top right
+         0.5f, -0.5f, 0.0f,  // bottom right
+        -0.5f, -0.5f, 0.0f,  // bottom left
+        -0.5f,  0.5f, 0.0f   // top left 
+    };
+    unsigned int indices[] = {  // note that we start from 0!
+        0, 1, 3,  // first Triangle
+        1, 2, 3   // second Triangle
+    };
 
-	uint32_t VBO, EBO, VAO;
+	uint32_t VBO, EBO;
 	glGenVertexArrays(1, &VAO);
 	glGenBuffers(1, &EBO);
 	glGenBuffers(1, &VBO);
@@ -59,14 +68,16 @@ void Engine::initGLAD()
 	glBindVertexArray(VAO);
 
 	glBindBuffer(GL_ARRAY_BUFFER, VBO);
-	glBufferData(GL_ARRAY_BUFFER, mesh.verticeCount * sizeof(float), mesh.vertices, GL_DYNAMIC_DRAW);
+	glBufferData(GL_ARRAY_BUFFER, sizeof(vertices), vertices, GL_DYNAMIC_DRAW);
 
 	glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, EBO);
-	glBufferData(GL_ELEMENT_ARRAY_BUFFER, mesh.indiceCount * sizeof(uint32_t), mesh.indices, GL_DYNAMIC_DRAW);
+	glBufferData(GL_ELEMENT_ARRAY_BUFFER, sizeof(indices), indices, GL_DYNAMIC_DRAW);
 
-	glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 3 * sizeof(float), 0);
+	glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 3 * sizeof(float), (void*)0);
 	glEnableVertexAttribArray(0);
-}*/
+
+	glBindBuffer(GL_ARRAY_BUFFER, 0);
+}	
 
 void Engine::framebuffer_size_callback(GLFWwindow* window, int width, int height)
 {
@@ -87,6 +98,7 @@ void Engine::mainLoop()
 		glClearColor(0.2f, 0.3f, 0.3f, 1.0f);
 		glClear(GL_COLOR_BUFFER_BIT);
 
+		glBindVertexArray(VAO);
 		glDrawElements(GL_TRIANGLES, indiceCount, GL_UNSIGNED_INT, 0);
 
 		glfwSwapBuffers(window.window);
