@@ -10,14 +10,17 @@ struct Array
 		std::size_t size; // Actual size of allocated memory
 		uint32_t length; // Number of elements 
 
-		Array(T* items, uint32_t size)
-		{
+		Array() :
+		array(new T[10]), size(10), length(0) {
+
+		}
+
+		Array(T* items, uint32_t size) {
 			array = items;
 			length = size;
 		}
 
-		Array(std::size_t size)
-		{
+		Array(std::size_t size) {
 			this->size = size;
 			array = new T[size];
 			length = 0;

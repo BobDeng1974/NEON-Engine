@@ -38,3 +38,17 @@ void Vector4::normalize() {
 Vector4 Vector4::normalized() {
 	return Vector4(this->x / magnitude, this->y / magnitude, this->z / magnitude);
 }
+
+Vector4 Vector4::operator+(const Vector4& vec) {
+	return Vector4(this->x + vec.x, this->y + vec.y, this->z + vec.z);
+}
+Vector4 Vector4::operator+(const float& value) {
+	return Vector4(this->x + value, this->y + value, this->z + value);
+}
+
+Vector4 Vector4::operator-(const Vector4& vec) {
+	return Vector4(this->x - vec.x, this->y - vec.y, this->z - vec.z);
+}
+Vector4 Vector4::operator-(const float& value) {
+	return Vector4(this->x - value, this->y - value, this->z - value);
+}
