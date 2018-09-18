@@ -1,5 +1,3 @@
-#define DEBUG
-
 #include <glad/glad.h>
 #include <GLFW/glfw3.h>
 #include <iostream>
@@ -7,7 +5,7 @@
 #include "Debug.h"
 #include "Window.h"
 
-void Window::initWindow(uint32_t width, uint32_t height)
+void Window::init(uint32_t width, uint32_t height)
 {
 	glfwInit();
 

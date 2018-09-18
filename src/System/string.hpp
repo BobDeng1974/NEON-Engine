@@ -24,12 +24,12 @@ struct string
 		uint32_t getLength();
 
 		string operator+(const string& str);
-		string operator+(const char& str);
+		string operator+(const char*& str);
 
 		void operator+=(const string& str);
 		void operator+=(const char& str);
 
-		bool operator==(string& str) const;
+		bool operator==(string& str);
 
 		char& operator[](std::size_t index);
 };

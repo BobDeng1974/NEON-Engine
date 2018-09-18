@@ -55,11 +55,9 @@ string* string::split(char splitter, uint32_t& count)
 		if(splitter == this->get(i))
 		{
 			i++;
-			std::cout << i << " " << splitIndex;
 			memcpy(splits[splitCount].data(), this->characters + splitIndex, (i - splitIndex) * sizeof(char));
 			splitCount++;
 			splitIndex = i;
-			std::cout << splits[splitCount - 1].data() << std::endl;
 		}
 	}
 	memcpy(splits[splitCount].data(), this->characters + splitIndex, (length - 1 - splitIndex) * sizeof(char));
@@ -89,11 +87,17 @@ string string::operator+(const string& str) {
 	memcpy(&newString + this->length, str.characters, str.length);
 }
 
+string string::operator+(const char*& str) {
+	string newString(this->length + strlen(str));
+	memcpy(&newString.characters, this->characters, this->length * sizeof(char));
+	memcpy(&newString + this->length, str, strlen(str));
+}
+
 char& string::operator[](std::size_t index) {
 	return this->characters[index]; 
 }
 
-bool string::operator==(string& str) const {
+bool string::operator==(string& str){
 	for(uint32_t i = 0; i < length; i++)
 		if(str[i] != this->characters[i])
 			return false;

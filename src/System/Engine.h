@@ -1,23 +1,19 @@
 #pragma once
 
+#include "ShaderProgram.cpp"
 #include "Window.cpp"
 
 class Engine
 {
 	private:
-		Window window;
+		ShaderProgram shaders;
 
 	public:
+		GLFWwindow* window;
+
 		void run();
 
-		void initWindow();
-		void initGLAD();
-
 		void initGL();
-
-		void proccessInput(Window* window);
-
-		static void framebuffer_size_callback(GLFWwindow* window, int width, int height);
 
 		void mainLoop();
 
