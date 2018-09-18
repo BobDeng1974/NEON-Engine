@@ -10,4 +10,6 @@
 namespace ContentPipeline
 {
 	char* LoadShader(char* path);
+
+	Mesh loadOBJ(char* path);
 }

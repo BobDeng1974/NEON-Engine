@@ -58,11 +58,8 @@ struct Array
 		void removeAt(uint32_t index) {
 			if(index >= length)
 				return;
-
 			if(index < length - 1)
 				memcpy(array + index, array + index + 1, (length - index - 1) * sizeof(T));
-
-			array[length - 1] = NULL;
 			length--;
 		}
 
@@ -88,7 +85,7 @@ struct Array
 			memcpy(destination, &array, length * sizeof(T));
 		}
 
-		T& operator[](std::size_t index) {
+		T& operator[](const std::size_t index) const {
 			return array[index];
 		}
 };

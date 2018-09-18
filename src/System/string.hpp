@@ -21,6 +21,8 @@ struct string
 		char get(std::size_t index);
 		void copy(char* target, uint32_t start, std::size_t size);
 
+		void add(char* str, std::size_t size);
+
 		uint32_t getLength();
 
 		string operator+(const string& str);
@@ -29,7 +31,12 @@ struct string
 		void operator+=(const string& str);
 		void operator+=(const char& str);
 
-		bool operator==(string& str);
+		bool operator==(const string& str) const;
+		bool operator==(const char*& str) const;
 
-		char& operator[](std::size_t index);
+		void operator=(const string& str) const;
+
+		operator char*() const;
+
+		char& operator[](std::size_t index) const;
 };

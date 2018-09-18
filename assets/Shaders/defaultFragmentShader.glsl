@@ -1,7 +1,6 @@
-#version 440 core
-layout(position = 0) in vec3 vertices;
-
+#version 330 core
+out vec4 FragColor;
 void main()
 {
-	gl_Position = vertices;
+    FragColor = vec4(1.0f, 0.5f, 0.2f, 1.0f);
 }
