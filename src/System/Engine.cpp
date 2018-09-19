@@ -9,11 +9,10 @@
 #include "Engine.h"
 #include "Debug.h"
 #include "Mesh.cpp"
-#include "GLAD.h"
 #include "ContentPipeline.cpp"
 
-uint32_t indiceCount = 0;
-uint32_t VAO = 0;
+void framebuffer_size_callback(GLFWwindow* window, int width, int height);
+void processInput(GLFWwindow *window);
 
 void Engine::run()
 {
@@ -66,11 +65,13 @@ void Engine::initGL()
 	glBindBuffer(GL_ARRAY_BUFFER, 0);
 }
 
+// Loop of the game engine
+// =======================
 void Engine::mainLoop()
 {
 	while(!glfwWindowShouldClose(window))
 	{
-		//proccessInput(&window);
+		processInput(window);
 		glClearColor(0.2f, 0.3f, 0.3f, 1.0f);
 		glClear(GL_COLOR_BUFFER_BIT);
 		shaders.useProgram();
@@ -83,7 +84,22 @@ void Engine::mainLoop()
 	}
 }
 
+// Cleans up after the engine
+// ==========================
 void Engine::cleanup()
 {
 	glfwTerminate();
+}
+
+// Processess input from user
+// ==========================
+void processInput(GLFWwindow *window) {
+    if (glfwGetKey(window, GLFW_KEY_ESCAPE) == GLFW_PRESS)
+        glfwSetWindowShouldClose(window, true);
+}
+
+// Resize the framebuffer size
+// ===========================
+void framebuffer_size_callback(GLFWwindow* window, int width, int height) {
+    glViewport(0, 0, width, height);
 }

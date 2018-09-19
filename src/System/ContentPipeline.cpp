@@ -33,10 +33,6 @@ Mesh ContentPipeline::loadOBJ(char* path)
 	
 	while(!file.eof())
 	{
-		string word = File::readWord(file);
-		if(word == "v")
-		{
-			
-		}
+		
 	}
 }

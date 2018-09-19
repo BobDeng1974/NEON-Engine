@@ -12,4 +12,5 @@ namespace ContentPipeline
 	char* LoadShader(char* path);
 
 	Mesh loadOBJ(char* path);
+	Mesh loadFBX(char* path);
 }

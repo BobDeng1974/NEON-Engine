@@ -10,6 +10,7 @@ class Engine
 
 	public:
 		GLFWwindow* window;
+		uint32_t VAO;
 
 		void run();
 

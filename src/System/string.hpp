@@ -1,4 +1,5 @@
 #include <cstdint>
+#include <iostream>
 
 struct string
 {
@@ -9,32 +10,49 @@ struct string
 		std::size_t size; // Actual reserved size
 		std::size_t length; // Length of string
 
+		// Initialize new string with space for 8 characters
 		string();
-		string(std::size_t size);
+		// Initialize new string with specified space
+		string(const std::size_t size);
 		string(char str[]);
-		string(char* str, uint32_t length);
+		string(char* str, const uint32_t length);
 
+		// Determine if string starts with specified token
 		bool startsWith(string* token);
+
+		// Splits string
 		string* split(char splitter, uint32_t& splitCount);
 
+		// Converts string into int32_t
+		int32_t toInt32();
+
+		// Gets characters
 		char* data();
+		// Get character on specific position
 		char get(std::size_t index);
-		void copy(char* target, uint32_t start, std::size_t size);
-
+		// Copies data
+		void copyTo(char* target, uint32_t start, std::size_t size);
+		void copyHere(char* source, uint32_t start, std::size_t size);
+		// Adds another string
+		// ===================
 		void add(char* str, std::size_t size);
+		void add(const string str);
 
-		uint32_t getLength();
-
+		// Operator overloading
+		// ====================
 		string operator+(const string& str);
 		string operator+(const char*& str);
 
-		void operator+=(const string& str);
-		void operator+=(const char& str);
+		string& operator+=(const string& str);
+		string& operator+=(const char& str);
 
 		bool operator==(const string& str) const;
 		bool operator==(const char*& str) const;
 
-		void operator=(const string& str) const;
+		string& operator=(string str);
+
+		friend std::ostream& operator<<(std::ostream& stream, const string& str);
+		friend std::istream& operator>>(std::istream& stream, const string& str);
 
 		operator char*() const;
 
