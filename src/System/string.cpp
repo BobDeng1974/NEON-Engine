@@ -45,7 +45,7 @@ string* string::split(char splitter, uint32_t& splitCount) {
 	uint32_t splitIndex = 0;
 
 	char result[this->length];
-
+	
 }
 
 // Returns
@@ -109,3 +109,11 @@ void string::realloc(std::size_t size) {
 
 // Operator Overloading
 // ====================
+bool string::operator==(const char* str) {
+	for(uint32_t i = 0; this->length; i++) {
+		if(str[i] != this->get(i))
+			return false;
+	}
+
+	return true;
+}

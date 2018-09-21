@@ -48,8 +48,7 @@ struct string
 		string& operator+=(const string& str);
 		string& operator+=(const char& str);
 
-		bool operator==(const string& str) const;
-		bool operator==(const char*& str) const;
+		bool operator==(const char* str1);
 
 		string& operator=(string str);
 

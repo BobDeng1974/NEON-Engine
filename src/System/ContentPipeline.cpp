@@ -35,8 +35,12 @@ Mesh ContentPipeline::loadOBJ(char* path)
 	Array<Vector3> vertices(50);
 	Array<uint32_t> indices(100);
 
-	while(!file.eof())
-	{
-		
+	while(!file.eof()) {
+		string word = File::getWord(file);
+
+		if(word == "v") {
+			string line = File::getLine(file);
+			
+		}
 	}
 }
