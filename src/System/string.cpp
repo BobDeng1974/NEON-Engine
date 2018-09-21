@@ -1,4 +1,5 @@
 #include "string.hpp"
+#include <cstring>
 
 #pragma region Constructor
 // Constructors
@@ -91,6 +92,19 @@ void string::add(char* str, std::size_t size) {
 
 	memcpy(this->characters + this->length, str, size);
 	this->length += size;
+}
+
+void string::realloc(std::size_t size) {
+	char* tmp = new char[size];
+
+	memcpy(tmp, this->characters, size);
+	delete this->characters;
+
+	this->characters = tmp;
+
+	this->size = size;
+	if(size > this->length)
+		this->length = size;
 }
 
 // Operator Overloading

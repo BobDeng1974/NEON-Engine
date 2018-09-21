@@ -1,10 +1,21 @@
 #include "File.h"
 
 string File::getLine(std::ifstream& stream) {
-	string output(100);
+	std::size_t size = 100;
+	string output(size);
 
 	while(true) {
 		char c;
 		stream.get(c);
+
+		if(c == '\0' || c == '\n') {
+			return output;
+		}
+
+		else {
+			if(output.length <= i) {
+				
+			}
+		}
 	}
 }

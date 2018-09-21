@@ -33,6 +33,8 @@ struct string
 		// Copies data
 		void copyTo(char* target, uint32_t start, std::size_t size);
 		void copyHere(char* source, uint32_t start, std::size_t size);
+
+		void realloc(std::size_t newSize);
 		// Adds another string
 		// ===================
 		void add(char* str, std::size_t size);
