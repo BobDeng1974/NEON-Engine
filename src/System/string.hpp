@@ -29,7 +29,7 @@ struct string
 		// Gets characters
 		char* data();
 		// Get character on specific position
-		char get(std::size_t index);
+		char get(uint32_t index);
 		// Copies data
 		void copyTo(char* target, uint32_t start, std::size_t size);
 		void copyHere(char* source, uint32_t start, std::size_t size);

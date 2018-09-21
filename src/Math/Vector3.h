@@ -19,14 +19,14 @@ struct Vector3
 		Vector3 operator+(const Vector3& vec);
 		Vector3 operator+(const float& value);
 
-		void operator+=(const Vector3& vec);
-		void operator+=(const float& vec);
+		//void operator+=(const Vector3& vec);
+		//void operator+=(const float& vec);
 
 		Vector3 operator-(const Vector3& vec);
 		Vector3 operator-(const float& value);
 
-		void operator-=(const Vector3& vec);
-		void operator+=(const float& value);
+		//void operator-=(const Vector3& vec);
+		//void operator+=(const float& value);
 
 		Vector3 operator*(const float& value);
 		Vector3 operator/(const float& value);

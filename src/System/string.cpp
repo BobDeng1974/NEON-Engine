@@ -43,11 +43,55 @@ string* string::split(char splitter, uint32_t& splitCount) {
 	uint32_t resultIndex = 0;
 	uint32_t splitIndex = 0;
 
-	
+	char result[this->length];
 
-	for(uint32_t i = 0; i < this->length; i++) {
-		if(this->get(i) == splitter) {
-			result[index]
-		}
-	}
 }
+
+// Returns
+// =======
+int32_t string::toInt32() {
+	return std::stoi(characters);
+}
+
+char* string::data() {
+	return characters;
+}
+
+char string::get(uint32_t index) { 
+	return characters[index];
+}
+
+// Copying
+// =======
+void string::copyTo(char* target, uint32_t start, std::size_t size) {
+	memcpy(target, this->characters, size);
+}
+
+void string::copyHere(char* source, uint32_t start, std::size_t size) {
+	if(size > size){
+		delete characters; // Release characters
+		this->characters = new char[size]; // Initialize new place for characters
+
+		this->size = size;
+		this->length = length;
+	}
+
+	memcpy(this->characters, source, size);
+}
+
+// Addition
+// ========
+void string::add(char* str, std::size_t size) {
+	char* temp;
+	if(this->size < size + this->length) {
+		this->size = size + this->size;
+		temp = new char[this->size];
+		memcpy(temp, this->characters, this->length);
+	}
+
+	memcpy(this->characters + this->length, str, size);
+	this->length += size;
+}
+
+// Operator Overloading
+// ====================

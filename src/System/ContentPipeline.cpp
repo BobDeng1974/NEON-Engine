@@ -6,6 +6,7 @@
 #include "File.cpp"
 
 #include "Vector4.cpp"
+#include "Vector3.cpp"
 
 
 char* ContentPipeline::LoadShader(char* path)
@@ -31,6 +32,9 @@ Mesh ContentPipeline::loadOBJ(char* path)
 	if(!file.is_open())
 		Debug::Error("Couldn't open OBJ file!");
 	
+	Array<Vector3> vertices(50);
+	Array<uint32_t> indices(100);
+
 	while(!file.eof())
 	{
 		

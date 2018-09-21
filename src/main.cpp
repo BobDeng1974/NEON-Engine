@@ -1,4 +1,4 @@
-#define TEST
+//#define TEST
 
 #include <glad/glad.h>
 #include <GLFW/glfw3.h>
@@ -12,11 +12,7 @@
 #ifdef TEST
 int main()
 {
-    char pepa[] = {'p', 'g'};
-    std::cout << sizeof(pepa);
-
-    char* pepik = "pg";
-    std::cout << sizeof(pepik);
+    
 }
 #else
 int main()
