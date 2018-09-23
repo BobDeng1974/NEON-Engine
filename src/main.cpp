@@ -12,7 +12,7 @@
 #ifdef TEST
 int main()
 {
-    
+
 }
 #else
 int main()

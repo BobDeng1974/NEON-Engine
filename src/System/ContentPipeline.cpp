@@ -7,8 +7,10 @@
 
 #include "Vector4.cpp"
 #include "Vector3.cpp"
+#include "Array.h"
 
-
+// Loads shader on path
+// ====================
 char* ContentPipeline::LoadShader(char* path)
 {
 	std::ifstream file(path, std::ios::ate);
@@ -32,15 +34,30 @@ Mesh ContentPipeline::loadOBJ(char* path)
 	if(!file.is_open())
 		Debug::Error("Couldn't open OBJ file!");
 	
-	Array<Vector3> vertices(50);
+
+	Array<float> vertices(60);
 	Array<uint32_t> indices(100);
 
-	while(!file.eof()) {
-		string word = File::getWord(file);
-
+	Debug::Message("Loop started!");
+	string word;
+	while(file >> word) {
 		if(word == "v") {
-			string line = File::getLine(file);
-			
+			for(uint32_t i = 0; i < 3; i++) {
+				file >> word;
+				vertices.add(word.toFloat());
+			}
+		}
+
+		else if(word == "f") {
+			for(uint32_t i = 0; i < 3; i++) {
+				file >> word;
+
+				uint32_t splitCount = 0;
+				string* splits = word.split('/', splitCount);
+				indices.add(splits[0].toInt32());
+			}
 		}
 	}
+
+	return Mesh(vertices.array, indices.array, vertices.length, indices.length);
 }

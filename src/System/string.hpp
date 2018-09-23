@@ -23,8 +23,9 @@ struct string
 		// Splits string
 		string* split(char splitter, uint32_t& splitCount);
 
-		// Converts string into int32_t
+		// Converts string into other types
 		int32_t toInt32();
+		float toFloat();
 
 		// Gets characters
 		char* data();
@@ -46,16 +47,22 @@ struct string
 		string operator+(const char*& str);
 
 		string& operator+=(const string& str);
-		string& operator+=(const char& str);
+		string& operator+=(const char*& str);
 
 		bool operator==(const char* str1);
 
 		string& operator=(string str);
 
-		friend std::ostream& operator<<(std::ostream& stream, const string& str);
-		friend std::istream& operator>>(std::istream& stream, const string& str);
+		friend std::ostream& operator<<(std::ostream& stream, const string& str){
+			stream << str.characters;
+			return stream;
+		}
+		friend std::istream& operator>>(std::istream& stream, string& str) {
+			stream >> str.characters;
+			return stream;
+		}
 
-		operator char*() const;
+		//operator char*() const;
 
 		char& operator[](std::size_t index) const;
 };

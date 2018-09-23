@@ -1,6 +1,6 @@
 #include <fstream>
 
-#include "string.cpp"
+#include "string.h"
 
 namespace File
 {

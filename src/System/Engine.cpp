@@ -34,6 +34,7 @@ void Engine::initGL()
 
 	Debug::Message("Linking Program!");
 	shaders.linkProgram();
+	Mesh mesh = ContentPipeline::loadOBJ("/home/martin/Desktop/cube.obj");
 
 	float vertices[] = {
          0.5f,  0.5f, 0.0f,  // top right

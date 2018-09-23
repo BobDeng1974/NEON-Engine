@@ -35,18 +35,18 @@ string File::getWord(std::ifstream& stream) {
 		stream.get(c);
 
 		if(c == ' ' || c == '\0')
-			return output;
+			break;
 		else {
 			if(output.length <= index) {
 				size += 25;
 				output.realloc(size);
 			}
-
+			std::cout << c;
 			output[index] = c;
 		}
 
 		index++;
 	}
 
-	return nullptr;
+	return output;
 }
