@@ -1,4 +1,5 @@
 #include "Matrix4x4.h"
+#include <math.h>
 
 Matrix4x4::Matrix4x4(float value) :
 M11(value), M21(value), M31(value), M41(value),
@@ -25,4 +26,14 @@ Matrix4x4 Matrix4x4::identity() {
 		};
 
 	return Matrix4x4(values, 16);
+}
+
+
+Matrix4x4 Matrix4x4::createPerspective(float fov, float aspect, float zNear, float zFar) {
+	float yMax = zNear * tan(0.5f * fov);
+	float yMin = -yMax;
+	float xMin = yMin * aspect;
+	float xMax = yMax * aspect;
+
+	
 }

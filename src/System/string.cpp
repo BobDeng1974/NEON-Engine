@@ -44,21 +44,29 @@ string** string::split(const char splitter, uint32_t& splitCount) {
 		}
 	}
 	splitCount++;
+	std::cout << splitCount;
 	uint32_t resultIndex = 0;
 	uint32_t splitIndex = 0;
 
-	string* strings[splitCount];
+	string** strings = new string*[splitCount];
 
 	for(uint32_t i = 0; i <= this->length; i++) {
-		if(this->get(i) == splitter || this->get(i) == '\0') {
+		if(splitIndex == i - 1) {
+			splitCount--;
+			continue;
+		}
+
+		else if(this->get(i) == splitter || this->get(i) == '\0') {
 			strings[resultIndex] = new string(new char[i - splitIndex], i - splitIndex);
 			memcpy(strings[resultIndex]->characters, this->characters + splitIndex, i - splitIndex);
+			Debug::Message(strings[resultIndex]->characters);
+			i++;
 			resultIndex++;
 			splitIndex = i;
 		}
 	}
 
-	return nullptr;
+	return strings;
 }
 
 // Returns

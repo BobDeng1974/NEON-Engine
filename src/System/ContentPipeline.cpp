@@ -38,31 +38,31 @@ Mesh ContentPipeline::loadOBJ(char* path)
 	Array<float> vertices(60);
 	Array<uint32_t> indices(100);
 
-	Debug::Message("Loop started!");
 	string word;
 	while(file >> word) {
-		Debug::Message(word.data());
+		// Convert vertex definition
 		if(!strcmp(word.data(), "v")) {
-			Debug::Message("pepa");
 			for(uint32_t i = 0; i < 3; i++) {
 				file >> word;
-				Debug::Message(word.data());
 				vertices.add(word.toFloat());
 			}
 		}
 
+		// Convert face definition
 		else if(!strcmp(word.data(), "f")) {
-			Debug::Message("lolicek");
+			// Iterate through face indices
 			for(uint32_t i = 0; i < 3; i++) {
-				file >> word;
+				file >> word; // Gets first pack of indices
 				Debug::Message(word.data());
-				uint32_t splitCount = 0;
-				string* splits = word.split('/', splitCount);
-				Debug::Message("lolicek");
-				for(int i = 0; i < splitCount; i++) {
-					Debug::Message(splits[i].data());
+
+				uint32_t splitCount = 0; // Stores number of splits
+				string** splits = word.split('/', splitCount); // Stores splits
+				// Iterate over indices types
+				std::cout << splitCount;
+				for(int x = 0; x < splitCount; x++) {
+					Debug::Message(splits[x]->characters);
 				}
-				indices.add(splits[i].toInt32());
+				indices.add(splits[0]->toInt32());
 			}
 		}
 	}

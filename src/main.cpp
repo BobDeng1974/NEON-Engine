@@ -1,23 +1,17 @@
-#define TEST
+//#define TEST
 
-//#include <glad/glad.h>
-//#include <GLFW/glfw3.h>
+#include <glad/glad.h>
+#include <GLFW/glfw3.h>
 
 #include <iostream>
 
-#include "string.cpp"
+#include "Engine.cpp"
 
 // Main method containing all the code that needs to be defined globally
 // =====================================================================
 #ifdef TEST
 int main()
 {
-    std::cout << "hello";
-    string str = "dneska je pekne pocasi!";
-    uint32_t count = 0;
-    std::cout << str.data();
-    string** strings = str.split(' ', count);
-    //std::cout << strings[0]->data();
 }
 #else
 int main()

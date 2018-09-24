@@ -38,4 +38,6 @@ struct Matrix4x4
 
 		Matrix4x4 scaled(Vector3 scale);
 		Matrix4x4 scaled(Vector4 scale);
+
+		Matrix4x4 createPerspective(float fov, float aspect, float zNear, float zFar);
 };

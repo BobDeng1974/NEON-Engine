@@ -5,9 +5,9 @@
 struct string
 {
 	private:
-		char* characters;
 
 	public:
+		char* characters;
 		std::size_t size; // Actual reserved size
 		std::size_t length; // Length of string
 
@@ -64,6 +64,8 @@ struct string
 		}
 		friend std::istream& operator>>(std::istream& stream, string& str) {
 			stream >> str.characters;
+			str.length = str.getLength();
+			str.size = str.getLength();
 			return stream;
 		}
 
