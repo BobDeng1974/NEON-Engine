@@ -16,8 +16,8 @@
         --profile="core" --api="gl=4.0" --generator="c" --spec="gl" --extensions=""
     Online:
         http://glad.dav1d.de/#profile=core&language=c&specification=gl&loader=on&api=gl%3D4.0
-*/
 
+*/
 #include <stdio.h>
 #include <stdlib.h>
 #include <cstring>
@@ -1154,11 +1154,6 @@ static int find_extensionsGL(void) {
 }
 
 static void find_coreGL(void) {
-
-    /* Thank you @elmindreda
-     * https://github.com/elmindreda/greg/blob/master/templates/greg.c.in#L176
-     * https://github.com/glfw/glfw/blob/master/src/context.c#L36
-     */
     int i, major, minor;
 
     const char* version;
@@ -1180,7 +1175,6 @@ static void find_coreGL(void) {
         }
     }
 
-/* PR #18 */
 #ifdef _MSC_VER
     sscanf_s(version, "%d.%d", &major, &minor);
 #else
@@ -1231,4 +1225,3 @@ int gladLoadGLLoader(GLADloadproc load) {
 	if (!find_extensionsGL()) return 0;
 	return GLVersion.major != 0 || GLVersion.minor != 0;
 }
-

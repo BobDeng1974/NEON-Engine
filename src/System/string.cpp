@@ -1,5 +1,6 @@
 #include <cstring>
 
+#include "Debug.h"
 #include "string.hpp"
 
 #pragma region Constructor
@@ -16,12 +17,12 @@ characters(new char[size]), length(0), size(size) {
 }
 
 string::string(char str[]) :
-characters(str), length(sizeof(str)), size(sizeof(str)) {
+characters(str), length(getLength()), size(getLength()) {
 	
 }
 
-string::string(char* str, const uint32_t size) :
-characters(str), length(size), size(size) {
+string::string(char* str, uint32_t length) : 
+characters(str), length(length), size(length) {
 
 }
 #pragma endregion
@@ -36,24 +37,28 @@ bool string::startsWith(string* token) {
 	return true;
 }
 
-string* string::split(char splitter, uint32_t& splitCount) {
+string** string::split(const char splitter, uint32_t& splitCount) {
 	for(uint32_t i = 0; i < this->length; i++) {
 		if(this->get(i) == splitter) {
 			splitCount++;
 		}
 	}
+	splitCount++;
 	uint32_t resultIndex = 0;
 	uint32_t splitIndex = 0;
 
-	string results[splitCount];
+	string* strings[splitCount];
 
-	for(uint32_t i = 0; i < this->length; i++) {
-		if(this->get(i) == splitter) {
-			results[resultIndex] = string(i - splitIndex);
+	for(uint32_t i = 0; i <= this->length; i++) {
+		if(this->get(i) == splitter || this->get(i) == '\0') {
+			strings[resultIndex] = new string(new char[i - splitIndex], i - splitIndex);
+			memcpy(strings[resultIndex]->characters, this->characters + splitIndex, i - splitIndex);
+			resultIndex++;
+			splitIndex = i;
 		}
 	}
 
-	return results;
+	return nullptr;
 }
 
 // Returns
@@ -72,6 +77,14 @@ char* string::data() {
 
 char string::get(uint32_t index) { 
 	return characters[index];
+}
+
+uint32_t string::getLength() {
+	for(uint32_t i = 0; ; i++) {
+		if(this->characters[i] == '\0') {
+			return i;
+		}
+	}
 }
 
 // Copying
@@ -146,18 +159,32 @@ string& string::operator+=(const char*& str) {
 	
 }
 
-bool string::operator==(const char* str) {
-	for(uint32_t i = 0; this->length; i++) {
-		if(str[i] != this->get(i))
-			return false;
-	}
-
-	return true;
+bool string::operator==(char*& str) const {
+	return strcmp(this->characters, str) == 0;
 }
 
-string& string::operator=(string str)
-{
+bool string::operator==(const char* str) const {
+	return strcmp(this->characters, str);
+}
 
+
+bool string::operator==(const char*& str) const {
+	return strcmp(this->characters, str);
+}
+
+
+bool string::operator!=(char*& str) {
+	return false;
+}
+
+string& string::operator=(const string& str)
+{
+	delete characters;
+	characters = new char[str.length];
+
+	this->characters = str.characters;
+	this->length = str.length;
+	this->size = str.length;
 }
 
 char& string::operator[](std::size_t index) const {

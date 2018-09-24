@@ -41,23 +41,30 @@ Mesh ContentPipeline::loadOBJ(char* path)
 	Debug::Message("Loop started!");
 	string word;
 	while(file >> word) {
-		if(word == "v") {
+		Debug::Message(word.data());
+		if(!strcmp(word.data(), "v")) {
+			Debug::Message("pepa");
 			for(uint32_t i = 0; i < 3; i++) {
 				file >> word;
+				Debug::Message(word.data());
 				vertices.add(word.toFloat());
 			}
 		}
 
-		else if(word == "f") {
+		else if(!strcmp(word.data(), "f")) {
+			Debug::Message("lolicek");
 			for(uint32_t i = 0; i < 3; i++) {
 				file >> word;
-
+				Debug::Message(word.data());
 				uint32_t splitCount = 0;
 				string* splits = word.split('/', splitCount);
-				indices.add(splits[0].toInt32());
+				Debug::Message("lolicek");
+				for(int i = 0; i < splitCount; i++) {
+					Debug::Message(splits[i].data());
+				}
+				indices.add(splits[i].toInt32());
 			}
 		}
 	}
-
 	return Mesh(vertices.array, indices.array, vertices.length, indices.length);
 }
