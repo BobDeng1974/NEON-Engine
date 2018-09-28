@@ -1,5 +1,3 @@
-#include <cstring>
-
 #include "Debug.h"
 #include "string.hpp"
 
@@ -66,33 +64,38 @@ string** string::split(const char splitter, uint32_t& splitCount) {
 	// Gets number of splits
 	uint32_t splitIndex = 0;
 	uint32_t resultIndex = 0;
-	for(uint32_t i = 0; i < this->length; i++) {
+	for(uint32_t i = 0; i != this->length; i++) {
 		if(this->get(i) == splitter || this->get(i) == '\0') {
 			if(splitIndex + 1 == i) {
 				continue;
 			} else {
 				splitCount++;
+				i++;
 				splitIndex = i;
 			}
 		}
 	}
 
+	splitIndex = 0;
 	string* strings[splitCount];
 
-	for(uint32_t i = 0; i < this->length; i++) {
+	for(uint32_t i = 0; i != this->length + 1; i++) {
 		if(this->get(i) == splitter || this->get(i) == '\0') {
-			if(splitIndex + 1 == i) {
+			if(splitIndex == i) {
+				splitIndex++;
 				continue;
 			} else {
 				strings[resultIndex] = new string(i - splitIndex);
-				//memcpy(strings[resultIndex]->characters, this->characters + splitIndex, i - splitIndex);
-
+				memcpy(strings[resultIndex]->characters, this->characters + splitIndex, i - splitIndex);
+				strings[resultIndex]->length = i - splitIndex;
+				std::cout << strings[resultIndex]->characters << "|" << std::endl;
 				splitIndex = i;
+				splitIndex++;
 			}
 		}
 	}
 
-	return nullptr;
+	return strings;
 }
 
 // Returns
@@ -124,7 +127,7 @@ uint32_t string::getLength() {
 // Copying
 // =======
 void string::copyTo(char* target, uint32_t start, std::size_t size) {
-	memcpy(target, this->characters, size);
+	std::memcpy(target, this->characters, size);
 }
 
 void string::copyHere(char* source, uint32_t start, std::size_t size) {

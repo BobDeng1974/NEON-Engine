@@ -17,8 +17,8 @@ int main()
     uint32_t count = 0;
     string** strings = str.split(' ', count);
     std::cout << count;
-    //for(uint32_t i = 0; i < count; i++)
-    //    Debug::Message(strings[i].characters);
+    for(uint32_t i = 0; i < count; i++)
+        std::cout << strings[i]->data();
 }
 #else
 int main()
