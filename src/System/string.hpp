@@ -23,7 +23,7 @@ struct string
 		bool startsWith(string* token);
 
 		// Splits string
-		string** split(const char splitter, uint32_t& splitCount);
+		void split(const char splitter, string**& splits, uint32_t& splitCount);
 
 		// Converts string into other types
 		int32_t toInt32();

@@ -54,15 +54,12 @@ Mesh ContentPipeline::loadOBJ(char* path)
 		else if(!strcmp(word.data(), "f")) {
 			// Iterate through face indices
 			for(uint32_t i = 0; i < 3; i++) {
-				/* file >> word; // Gets first pack of indices
-
-				uint32_t splitCount = 0; // Stores number of splits
-				string** splits = word.split('/', splitCount); // Stores splits
-				// Iterate over indices types
-				for(int x = 0; x < splitCount; x++) {
-					//Debug::Message(splits[x]->characters);
-				}
-				indices.add(splits[0]->toInt32()); */
+				file >> word;
+				std::cout << "Face : " << word.characters << std::endl;
+				string** splits;
+				uint32_t count = 0;
+				word.split('/', splits, count);
+				std::cout << "First indice : " << splits[0]->length << std::endl;
 			}
 		}
 	}

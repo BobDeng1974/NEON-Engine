@@ -35,32 +35,7 @@ bool string::startsWith(string* token) {
 	return true;
 }
 
-string** string::split(const char splitter, uint32_t& splitCount) {
-	/*for(uint32_t i = 0; i < this->length; i++) {
-		if(this->get(i) == splitter) {
-			splitCount++;
-			i++;
-		}
-	}
-	splitCount++;
-	uint32_t splitIndex = 0;
-	uint32_t resultIndex = 0;
-
-	string** strings = new string*[splitCount];
-	for(uint32_t i = 0; i <= this->length; i++) {
-		if(this->get(i) == splitter || this->get(i) == '\0') {
-			strings[resultIndex] = new string(new char[i - splitIndex - 1], i - splitIndex - 1);
-			memcpy(strings[resultIndex]->characters, this->characters + splitIndex, i - splitIndex - 1);
-			std::cout << strings[resultIndex]->characters << std::endl << std::endl;
-			std::cout << "length" << i - splitIndex - 1 << std::endl << "real length" << strings[resultIndex]->length << std::endl;
-			i++;
-			resultIndex++;
-			splitIndex = i;
-		}
-	}
-
-	return strings;*/
-
+void string::split(const char splitter, string**& splits, uint32_t& splitCount) {
 	// Gets number of splits
 	uint32_t splitIndex = 0;
 	uint32_t resultIndex = 0;
@@ -77,7 +52,7 @@ string** string::split(const char splitter, uint32_t& splitCount) {
 	}
 
 	splitIndex = 0;
-	string* strings[splitCount];
+	splits = new string*[splitCount];
 
 	for(uint32_t i = 0; i != this->length + 1; i++) {
 		if(this->get(i) == splitter || this->get(i) == '\0') {
@@ -85,17 +60,15 @@ string** string::split(const char splitter, uint32_t& splitCount) {
 				splitIndex++;
 				continue;
 			} else {
-				strings[resultIndex] = new string(i - splitIndex);
-				memcpy(strings[resultIndex]->characters, this->characters + splitIndex, i - splitIndex);
-				strings[resultIndex]->length = i - splitIndex;
-				std::cout << strings[resultIndex]->characters << "|" << std::endl;
+				splits[resultIndex] = new string(i - splitIndex);
+				memcpy(splits[resultIndex]->characters, this->characters + splitIndex, i - splitIndex);
+				splits[resultIndex]->length = i - splitIndex;
 				splitIndex = i;
 				splitIndex++;
+				resultIndex++;
 			}
 		}
 	}
-
-	return strings;
 }
 
 // Returns
