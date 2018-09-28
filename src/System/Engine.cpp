@@ -6,6 +6,10 @@
 #include <glad/glad.h>
 #include <GLFW/glfw3.h>
 
+#include <glm/glm.hpp>
+#include <glm/gtc/matrix_transform.hpp>
+#include <glm/gtc/type_ptr.hpp>
+
 #include "Engine.h"
 #include "Debug.h"
 #include "Mesh.cpp"
@@ -36,17 +40,6 @@ void Engine::initGL()
 	shaders.linkProgram();
 	Mesh mesh = ContentPipeline::loadOBJ("/home/martin/Desktop/cube.obj");
 
-	float vertices[] = {
-         0.5f,  0.5f, 0.0f,  // top right
-         0.5f, -0.5f, 0.0f,  // bottom right
-        -0.5f, -0.5f, 0.0f,  // bottom left
-        -0.5f,  0.5f, 0.0f   // top left 
-    };
-    unsigned int indices[] = {  // note that we start from 0!
-        0, 1, 3,  // first Triangle
-        1, 2, 3   // second Triangle
-    };
-
 	uint32_t VBO, EBO;
 	glGenVertexArrays(1, &VAO);
 	glGenBuffers(1, &VBO);
@@ -64,6 +57,18 @@ void Engine::initGL()
 	glEnableVertexAttribArray(0);
 
 	glBindBuffer(GL_ARRAY_BUFFER, 0);
+	uint32_t location = glGetUniformLocation(shaders.program, "projection");
+
+	glm::mat4 proj = glm::perspective(glm::radians(45.0f), (float)WIDTH/(float)HEIGHT, 0.1f, 100.0f);
+	glm::mat4 model;
+	model = glm::rotate(model, glm::radians(-55.0f), glm::vec3(1.0f, 0.0f, 0.0f));
+
+	glm::mat4 view;
+	view = glm::translate(view, glm::vec3(0.0f, 0.0f, -3.0f));
+
+	shaders.uniformMatrix4x4(proj, glGetUniformLocation(shaders.program, "projection"));
+	shaders.uniformMatrix4x4(model, glGetUniformLocation(shaders.program, "model"));
+	shaders.uniformMatrix4x4(view, glGetUniformLocation(shaders.program, "view"));
 }
 
 // Loop of the game engine

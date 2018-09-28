@@ -38,35 +38,61 @@ bool string::startsWith(string* token) {
 }
 
 string** string::split(const char splitter, uint32_t& splitCount) {
-	for(uint32_t i = 0; i < this->length; i++) {
+	/*for(uint32_t i = 0; i < this->length; i++) {
 		if(this->get(i) == splitter) {
 			splitCount++;
+			i++;
 		}
 	}
 	splitCount++;
-	std::cout << splitCount;
-	uint32_t resultIndex = 0;
 	uint32_t splitIndex = 0;
+	uint32_t resultIndex = 0;
 
 	string** strings = new string*[splitCount];
-
 	for(uint32_t i = 0; i <= this->length; i++) {
-		if(splitIndex == i - 1) {
-			splitCount--;
-			continue;
-		}
-
-		else if(this->get(i) == splitter || this->get(i) == '\0') {
-			strings[resultIndex] = new string(new char[i - splitIndex], i - splitIndex);
-			memcpy(strings[resultIndex]->characters, this->characters + splitIndex, i - splitIndex);
-			Debug::Message(strings[resultIndex]->characters);
+		if(this->get(i) == splitter || this->get(i) == '\0') {
+			strings[resultIndex] = new string(new char[i - splitIndex - 1], i - splitIndex - 1);
+			memcpy(strings[resultIndex]->characters, this->characters + splitIndex, i - splitIndex - 1);
+			std::cout << strings[resultIndex]->characters << std::endl << std::endl;
+			std::cout << "length" << i - splitIndex - 1 << std::endl << "real length" << strings[resultIndex]->length << std::endl;
 			i++;
 			resultIndex++;
 			splitIndex = i;
 		}
 	}
 
-	return strings;
+	return strings;*/
+
+	// Gets number of splits
+	uint32_t splitIndex = 0;
+	uint32_t resultIndex = 0;
+	for(uint32_t i = 0; i < this->length; i++) {
+		if(this->get(i) == splitter || this->get(i) == '\0') {
+			if(splitIndex + 1 == i) {
+				continue;
+			} else {
+				splitCount++;
+				splitIndex = i;
+			}
+		}
+	}
+
+	string* strings[splitCount];
+
+	for(uint32_t i = 0; i < this->length; i++) {
+		if(this->get(i) == splitter || this->get(i) == '\0') {
+			if(splitIndex + 1 == i) {
+				continue;
+			} else {
+				strings[resultIndex] = new string(i - splitIndex);
+				//memcpy(strings[resultIndex]->characters, this->characters + splitIndex, i - splitIndex);
+
+				splitIndex = i;
+			}
+		}
+	}
+
+	return nullptr;
 }
 
 // Returns

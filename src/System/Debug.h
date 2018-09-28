@@ -1,5 +1,6 @@
 #pragma once
 
+#include <fstream>
 #include <iostream>
 #include <cstdint>
 
@@ -14,6 +15,10 @@
 
 namespace Debug
 {
+	extern std::ostream& Test(char* str) {
+
+	}
+
 	inline void Error(char* message) {
 		#ifdef DEBUG
 		std::cout << FOREGROUND_RED << __TIME__ << " [ERROR]: " << message << FOREGROUND_RESET;

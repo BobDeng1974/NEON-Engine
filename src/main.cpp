@@ -1,4 +1,4 @@
-//#define TEST
+#define TEST
 
 #include <glad/glad.h>
 #include <GLFW/glfw3.h>
@@ -12,6 +12,13 @@
 #ifdef TEST
 int main()
 {
+    string str = "ahoj dneska   je ale pekne pocasi     ze";
+
+    uint32_t count = 0;
+    string** strings = str.split(' ', count);
+    std::cout << count;
+    //for(uint32_t i = 0; i < count; i++)
+    //    Debug::Message(strings[i].characters);
 }
 #else
 int main()

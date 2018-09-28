@@ -37,3 +37,7 @@ void ShaderProgram::linkProgram()
     }
 }
 void ShaderProgram::useProgram() { glUseProgram(program); }
+
+void ShaderProgram::uniformMatrix4x4(glm::mat4& matrix, uint32_t location) {
+	glUniformMatrix4fv(location, 1, false, glm::value_ptr(matrix));
+}

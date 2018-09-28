@@ -4,7 +4,6 @@
 #include <fstream>
 #include <cstring>
 
-#include "string.cpp"
 #include "Mesh.h"
 
 namespace ContentPipeline
