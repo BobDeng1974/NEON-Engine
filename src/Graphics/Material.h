@@ -1,13 +1,13 @@
 #pragma once
 
-#include "Vector3.cpp"
+#include <glm/glm.hpp>
 #include <cstdint>
 
 struct Material
 {
-	Vector3 ambient;
-	Vector3 diffuse;
-	Vector3 specular;
+	glm::vec3 ambient;
+	glm::vec3 diffuse;
+	glm::vec3 specular;
 
 	void uniform(uint32_t shaderProgram);
 };

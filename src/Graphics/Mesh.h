@@ -5,6 +5,8 @@ struct Mesh
 {
 	public:
 		float* vertices;
+		float* normals;
+
 		uint32_t* indices;
 
 		uint32_t verticeCount;

@@ -17,6 +17,7 @@ class Engine
 		void initGL();
 
 		void mainLoop();
+		void commands();
 
 		void cleanup();
 };

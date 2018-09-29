@@ -35,10 +35,13 @@ Mesh ContentPipeline::loadOBJ(char* path)
 	std::ifstream file(path);
 	if(!file.is_open())
 		Debug::Error("Couldn't open OBJ file!");
-	
 
+	Debug::Message("pepa");
 	Array<float> vertices(60);
+	Array<float> _normals(60);
+
 	Array<uint32_t> indices(100);
+	Array<float> normals(100);
 
 	string word;
 	while(file >> word) {
@@ -46,7 +49,13 @@ Mesh ContentPipeline::loadOBJ(char* path)
 		if(!strcmp(word.data(), "v")) {
 			for(uint32_t i = 0; i < 3; i++) {
 				file >> word;
-				std::cout << word;
+				vertices.add(std::stof(word.characters));
+			}
+		}
+
+		if(!strcmp(word.data(), "vn")) {
+			for(uint32_t i = 0; i < 3; i++) {
+				file >> word;
 				vertices.add(std::stof(word.characters));
 			}
 		}
@@ -61,12 +70,11 @@ Mesh ContentPipeline::loadOBJ(char* path)
 				uint32_t count = 0;
 
 				word.split('/', splits, count);
-				std::cout << "Count : " << count << std::endl;
-				for(uint32_t i = 0; i < count; i++) 
-					std::cout << splits[i]->characters << "|";
 
-				std::cout << std::endl;
-				indices.add(splits[0]->toInt32() - 1);
+				if(count == 2) {
+					indices.add(std::stoul(splits[0]->characters) - 1);
+					normals.add(_normals[std::stoi(splits[1]->characters) - 1]);
+				}
 			}
 		}
 	}

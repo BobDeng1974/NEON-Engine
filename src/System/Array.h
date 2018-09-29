@@ -30,13 +30,15 @@ struct Array
 
 		void add(const T item)
 		{
-			if(size == length)
+			if(size == length + 1)
 			{
-				size += 10;
-				array = (T*)realloc(array, size);
+				size += 50;
+				T* tempArr = new T[size];
+				memcpy(tempArr, array, length * sizeof(T));
+				delete array;
+				array = tempArr;
 			}
 			array[length] = item;
-
 			length++;
 		}
 

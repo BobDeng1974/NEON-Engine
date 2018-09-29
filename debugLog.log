@@ -1,0 +1,203 @@
+In file included from ./src/Graphics/ShaderProgram.cpp:1:0,
+                 from ./src/System/Engine.h:3,
+                 from ./src/System/Engine.cpp:13,
+                 from src/main.cpp:8:
+./src/Graphics/ShaderProgram.h:2:0: warning: "DEBUG" redefined
+ #define DEBUG
+ 
+<command-line>:0:0: note: this is the location of the previous definition
+In file included from ./src/Graphics/ShaderProgram.h:9:0,
+                 from ./src/Graphics/ShaderProgram.cpp:1,
+                 from ./src/System/Engine.h:3,
+                 from ./src/System/Engine.cpp:13,
+                 from src/main.cpp:8:
+./src/System/string.cpp:6:0: warning: ignoring #pragma region Constructor [-Wunknown-pragmas]
+ #pragma region Constructor
+ 
+./src/System/string.cpp:28:0: warning: ignoring #pragma endregion  [-Wunknown-pragmas]
+ #pragma endregion
+ 
+In file included from ./src/System/string.cpp:3:0,
+                 from ./src/Graphics/ShaderProgram.h:9,
+                 from ./src/Graphics/ShaderProgram.cpp:1,
+                 from ./src/System/Engine.h:3,
+                 from ./src/System/Engine.cpp:13,
+                 from src/main.cpp:8:
+./src/System/Debug.h: In function ‘std::ostream& Debug::Test(char*)’:
+./src/System/Debug.h:20:2: warning: no return statement in function returning non-void [-Wreturn-type]
+  }
+  ^
+In file included from ./src/System/string.cpp:4:0,
+                 from ./src/Graphics/ShaderProgram.h:9,
+                 from ./src/Graphics/ShaderProgram.cpp:1,
+                 from ./src/System/Engine.h:3,
+                 from ./src/System/Engine.cpp:13,
+                 from src/main.cpp:8:
+./src/System/string.hpp: In constructor ‘string::string()’:
+./src/System/string.hpp:12:15: warning: ‘string::length’ will be initialized after [-Wreorder]
+   std::size_t length; // Length of string
+               ^~~~~~
+./src/System/string.hpp:11:15: warning:   ‘std::size_t string::size’ [-Wreorder]
+   std::size_t size; // Actual reserved size
+               ^~~~
+In file included from ./src/Graphics/ShaderProgram.h:9:0,
+                 from ./src/Graphics/ShaderProgram.cpp:1,
+                 from ./src/System/Engine.h:3,
+                 from ./src/System/Engine.cpp:13,
+                 from src/main.cpp:8:
+./src/System/string.cpp:9:1: warning:   when initialized here [-Wreorder]
+ string::string() :
+ ^~~~~~
+In file included from ./src/System/string.cpp:4:0,
+                 from ./src/Graphics/ShaderProgram.h:9,
+                 from ./src/Graphics/ShaderProgram.cpp:1,
+                 from ./src/System/Engine.h:3,
+                 from ./src/System/Engine.cpp:13,
+                 from src/main.cpp:8:
+./src/System/string.hpp: In constructor ‘string::string(size_t)’:
+./src/System/string.hpp:12:15: warning: ‘string::length’ will be initialized after [-Wreorder]
+   std::size_t length; // Length of string
+               ^~~~~~
+./src/System/string.hpp:11:15: warning:   ‘std::size_t string::size’ [-Wreorder]
+   std::size_t size; // Actual reserved size
+               ^~~~
+In file included from ./src/Graphics/ShaderProgram.h:9:0,
+                 from ./src/Graphics/ShaderProgram.cpp:1,
+                 from ./src/System/Engine.h:3,
+                 from ./src/System/Engine.cpp:13,
+                 from src/main.cpp:8:
+./src/System/string.cpp:14:1: warning:   when initialized here [-Wreorder]
+ string::string(size_t size) :
+ ^~~~~~
+In file included from ./src/System/string.cpp:4:0,
+                 from ./src/Graphics/ShaderProgram.h:9,
+                 from ./src/Graphics/ShaderProgram.cpp:1,
+                 from ./src/System/Engine.h:3,
+                 from ./src/System/Engine.cpp:13,
+                 from src/main.cpp:8:
+./src/System/string.hpp: In constructor ‘string::string(char*)’:
+./src/System/string.hpp:12:15: warning: ‘string::length’ will be initialized after [-Wreorder]
+   std::size_t length; // Length of string
+               ^~~~~~
+./src/System/string.hpp:11:15: warning:   ‘std::size_t string::size’ [-Wreorder]
+   std::size_t size; // Actual reserved size
+               ^~~~
+In file included from ./src/Graphics/ShaderProgram.h:9:0,
+                 from ./src/Graphics/ShaderProgram.cpp:1,
+                 from ./src/System/Engine.h:3,
+                 from ./src/System/Engine.cpp:13,
+                 from src/main.cpp:8:
+./src/System/string.cpp:19:1: warning:   when initialized here [-Wreorder]
+ string::string(char str[]) :
+ ^~~~~~
+In file included from ./src/System/string.cpp:4:0,
+                 from ./src/Graphics/ShaderProgram.h:9,
+                 from ./src/Graphics/ShaderProgram.cpp:1,
+                 from ./src/System/Engine.h:3,
+                 from ./src/System/Engine.cpp:13,
+                 from src/main.cpp:8:
+./src/System/string.hpp: In constructor ‘string::string(char*, uint32_t)’:
+./src/System/string.hpp:12:15: warning: ‘string::length’ will be initialized after [-Wreorder]
+   std::size_t length; // Length of string
+               ^~~~~~
+./src/System/string.hpp:11:15: warning:   ‘std::size_t string::size’ [-Wreorder]
+   std::size_t size; // Actual reserved size
+               ^~~~
+In file included from ./src/Graphics/ShaderProgram.h:9:0,
+                 from ./src/Graphics/ShaderProgram.cpp:1,
+                 from ./src/System/Engine.h:3,
+                 from ./src/System/Engine.cpp:13,
+                 from src/main.cpp:8:
+./src/System/string.cpp:24:1: warning:   when initialized here [-Wreorder]
+ string::string(char* str, uint32_t length) :
+ ^~~~~~
+./src/System/string.cpp: In member function ‘string** string::split(char, uint32_t&)’:
+./src/System/string.cpp:63:26: warning: cast to pointer from integer of different size [-Wint-to-pointer-cast]
+    Debug::Message((char*)i);
+                          ^
+./src/System/string.cpp: In member function ‘void string::copyHere(char*, uint32_t, std::size_t)’:
+./src/System/string.cpp:106:10: warning: self-comparison always evaluates to false [-Wtautological-compare]
+  if(size > size){
+     ~~~~~^~~~~~
+./src/System/string.cpp: In member function ‘string string::operator+(const string&)’:
+./src/System/string.cpp:157:1: warning: no return statement in function returning non-void [-Wreturn-type]
+ }
+ ^
+./src/System/string.cpp: In member function ‘string string::operator+(const char*&)’:
+./src/System/string.cpp:161:1: warning: no return statement in function returning non-void [-Wreturn-type]
+ }
+ ^
+./src/System/string.cpp: In member function ‘string& string::operator+=(const string&)’:
+./src/System/string.cpp:165:1: warning: no return statement in function returning non-void [-Wreturn-type]
+ }
+ ^
+./src/System/string.cpp: In member function ‘string& string::operator+=(const char*&)’:
+./src/System/string.cpp:169:1: warning: no return statement in function returning non-void [-Wreturn-type]
+ }
+ ^
+./src/System/string.cpp: In member function ‘string& string::operator=(const string&)’:
+./src/System/string.cpp:197:1: warning: no return statement in function returning non-void [-Wreturn-type]
+ }
+ ^
+In file included from ./src/System/Engine.h:3:0,
+                 from ./src/System/Engine.cpp:13,
+                 from src/main.cpp:8:
+./src/Graphics/ShaderProgram.cpp: In member function ‘void ShaderProgram::addShader(GLenum, char*)’:
+./src/Graphics/ShaderProgram.cpp:21:41: warning: ISO C++ forbids converting a string constant to ‘char*’ [-Wwrite-strings]
+   Debug::Error("Couldn't create shader!");
+                                         ^
+./src/Graphics/ShaderProgram.cpp: In member function ‘void ShaderProgram::linkProgram()’:
+./src/Graphics/ShaderProgram.cpp:36:39: warning: ISO C++ forbids converting a string constant to ‘char*’ [-Wwrite-strings]
+         Debug::Error("Shader Linking!");
+                                       ^
+In file included from ./src/System/Engine.h:4:0,
+                 from ./src/System/Engine.cpp:13,
+                 from src/main.cpp:8:
+./src/System/Window.cpp: In member function ‘void Window::init(uint32_t, uint32_t)’:
+./src/System/Window.cpp:19:46: warning: ISO C++ forbids converting a string constant to ‘char*’ [-Wwrite-strings]
+   Debug::Error("Couldn't create GLFW Window!");
+                                              ^
+In file included from ./src/System/Engine.cpp:16:0,
+                 from src/main.cpp:8:
+./src/System/ContentPipeline.cpp: In function ‘char* ContentPipeline::LoadShader(char*)’:
+./src/System/ContentPipeline.cpp:20:49: warning: ISO C++ forbids converting a string constant to ‘char*’ [-Wwrite-strings]
+   Debug::Error("Shader file couldn't be opened!");
+                                                 ^
+./src/System/ContentPipeline.cpp: In function ‘Mesh ContentPipeline::loadOBJ(char*)’:
+./src/System/ContentPipeline.cpp:36:41: warning: ISO C++ forbids converting a string constant to ‘char*’ [-Wwrite-strings]
+   Debug::Error("Couldn't open OBJ file!");
+                                         ^
+./src/System/ContentPipeline.cpp:60:17: error: invalid operands of types ‘std::ostream&(char*) {aka std::basic_ostream<char>&(char*)}’ and ‘const char [5]’ to binary ‘operator<<’
+     Debug::Test << "pepa";
+     ~~~~~~~~~~~~^~~~~~~~~
+./src/System/ContentPipeline.cpp:62:22: warning: comparison between signed and unsigned integer expressions [-Wsign-compare]
+     for(int x = 0; x < splitCount; x++) {
+                    ~~^~~~~~~~~~~~
+In file included from src/main.cpp:8:0:
+./src/System/Engine.cpp: In member function ‘void Engine::run()’:
+./src/System/Engine.cpp:23:38: warning: ISO C++ forbids converting a string constant to ‘char*’ [-Wwrite-strings]
+  Debug::Message("Initializing OpenGL");
+                                      ^
+./src/System/Engine.cpp:26:36: warning: ISO C++ forbids converting a string constant to ‘char*’ [-Wwrite-strings]
+  Debug::Message("Viewport created!");
+                                    ^
+./src/System/Engine.cpp:29:37: warning: ISO C++ forbids converting a string constant to ‘char*’ [-Wwrite-strings]
+  Debug::Message("Main Loop Entered!");
+                                     ^
+In file included from src/main.cpp:8:0:
+./src/System/Engine.cpp: In member function ‘void Engine::initGL()’:
+./src/System/Engine.cpp:36:140: warning: ISO C++ forbids converting a string constant to ‘char*’ [-Wwrite-strings]
+  shaders.addShader(GL_VERTEX_SHADER, ContentPipeline::LoadShader("/home/martin/Projects/NEONEngine/assets/Shaders/defaultVertexShader.glsl"));
+                                                                                                                                            ^
+./src/System/Engine.cpp:37:144: warning: ISO C++ forbids converting a string constant to ‘char*’ [-Wwrite-strings]
+  shaders.addShader(GL_FRAGMENT_SHADER, ContentPipeline::LoadShader("/home/martin/Projects/NEONEngine/assets/Shaders/defaultFragmentShader.glsl"));
+                                                                                                                                                ^
+./src/System/Engine.cpp:39:35: warning: ISO C++ forbids converting a string constant to ‘char*’ [-Wwrite-strings]
+  Debug::Message("Linking Program!");
+                                   ^
+./src/System/Engine.cpp:41:70: warning: ISO C++ forbids converting a string constant to ‘char*’ [-Wwrite-strings]
+  Mesh mesh = ContentPipeline::loadOBJ("/home/martin/Desktop/cube.obj");
+                                                                      ^
+./src/System/Engine.cpp:60:11: warning: unused variable ‘location’ [-Wunused-variable]
+  uint32_t location = glGetUniformLocation(shaders.program, "projection");
+           ^~~~~~~~

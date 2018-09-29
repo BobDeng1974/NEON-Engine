@@ -35,13 +35,33 @@ void Engine::run()
 
 void Engine::initGL()
 {
+	shaders = ShaderProgram();
 	shaders.addShader(GL_VERTEX_SHADER, ContentPipeline::LoadShader("/home/martin/Projects/NEONEngine/assets/Shaders/defaultVertexShader.glsl"));
 	shaders.addShader(GL_FRAGMENT_SHADER, ContentPipeline::LoadShader("/home/martin/Projects/NEONEngine/assets/Shaders/defaultFragmentShader.glsl"));
 
 	Debug::Message("Linking Program!");
 	shaders.linkProgram();
-	Mesh mesh = ContentPipeline::loadOBJ("/home/martin/Desktop/cube.obj");
+	Mesh mesh = ContentPipeline::loadOBJ("/home/martin/Desktop/monu10.obj");
 	indiceCount = mesh.indiceCount;
+
+	for(uint32_t i = 0; i < mesh.verticeCount; i++) { 
+		std::cout << mesh.vertices[i] << "|";
+	} 
+	std::cout << std::endl;
+	for(uint32_t i = 0; i < mesh.indiceCount; i++) { 
+		std::cout << mesh.indices[i] << "|";
+	}
+
+	float vertices[] = {
+         0.5f,  0.5f, 0.0f,  // top right
+         0.5f, -0.5f, 0.0f,  // bottom right
+        -0.5f, -0.5f, 0.0f,  // bottom left
+        -0.5f,  0.5f, 0.0f   // top left 
+    };
+    unsigned int indices[] = {  // note that we start from 0!
+        0, 1, 3,  // first Triangle
+        1, 2, 3   // second Triangle
+    };
 
 	uint32_t VBO, EBO;
 	glGenVertexArrays(1, &VAO);
@@ -51,7 +71,7 @@ void Engine::initGL()
 	glBindVertexArray(VAO);
 
 	glBindBuffer(GL_ARRAY_BUFFER, VBO);
-	glBufferData(GL_ARRAY_BUFFER, sizeof(float) * mesh.verticeCount, mesh.vertices, GL_DYNAMIC_DRAW);
+	glBufferData(GL_ARRAY_BUFFER, sizeof(float) * (mesh.verticeCount + mesh.normalCount), nullptr, GL_DYNAMIC_DRAW);
 
 	glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, EBO);
 	glBufferData(GL_ELEMENT_ARRAY_BUFFER, sizeof(uint32_t) * mesh.indiceCount, mesh.indices, GL_DYNAMIC_DRAW);
@@ -62,16 +82,47 @@ void Engine::initGL()
 	glBindBuffer(GL_ARRAY_BUFFER, 0);
 	uint32_t location = glGetUniformLocation(shaders.program, "projection");
 
-	glm::mat4 proj = glm::perspective(glm::radians(45.0f), (float)WIDTH/(float)HEIGHT, 0.1f, 100.0f);
-	glm::mat4 model;
+	glm::mat4 proj = glm::mat4(1.0f);
+	proj = glm::perspective(glm::radians(45.0f), (float)720/480, 0.1f, 100.0f);
+	proj[3][3] = 1.0f;
+	glm::mat4 model = glm::mat4(1.0f);
 	model = glm::rotate(model, glm::radians(-55.0f), glm::vec3(1.0f, 0.0f, 0.0f));
+	model[3][3] = 1.0f;
 
-	glm::mat4 view;
-	view = glm::translate(view, glm::vec3(0.0f, 0.0f, -3.0f));
+	glm::mat4 view = glm::mat4(1.0f);
+	view = glm::translate(view, glm::vec3(0.0f, 0.0f, 3.0f));
+	view[3][3] = 1.0f;
 
-	shaders.uniformMatrix4x4(proj, glGetUniformLocation(shaders.program, "projection"));
-	shaders.uniformMatrix4x4(model, glGetUniformLocation(shaders.program, "model"));
-	shaders.uniformMatrix4x4(view, glGetUniformLocation(shaders.program, "view"));
+	std::cout << std::endl << "Projection : " << std::endl;
+	for(uint32_t x = 0; x < 4; x++) {
+		for(uint32_t y = 0; y < 4; y++) {
+			std::cout << proj[y][x] << "|";
+		}
+		std::cout << std::endl;
+	}
+
+	std::cout << std::endl << "Model : " << std::endl;
+	for(uint32_t x = 0; x < 4; x++) {
+		for(uint32_t y = 0; y < 4; y++) {
+			std::cout << model[y][x] << "|";
+		}
+		std::cout << std::endl;
+	}
+
+	std::cout << std::endl << "View : " << std::endl;
+	for(uint32_t x = 0; x < 4; x++) {
+		for(uint32_t y = 0; y < 4; y++) {
+			std::cout << view[y][x] << "|";
+		}
+		std::cout << std::endl;
+	}
+
+	std::cout << glGetUniformLocation(shaders.program, "projection");
+	std::cout << glGetUniformLocation(shaders.program, "model");
+	std::cout << glGetUniformLocation(shaders.program, "view");
+	glUniformMatrix4fv(glGetUniformLocation(shaders.program, "projection"), 1, GL_FALSE, &proj[0][0]);
+	glUniformMatrix4fv(glGetUniformLocation(shaders.program, "model"), 1, GL_FALSE, &model[0][0]);
+	glUniformMatrix4fv(glGetUniformLocation(shaders.program, "view"), 1, GL_FALSE, &view[0][0]);
 }
 
 // Loop of the game engine
@@ -82,8 +133,22 @@ void Engine::mainLoop()
 	{
 		processInput(window);
 		glClearColor(0.2f, 0.3f, 0.3f, 1.0f);
-		glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_TEST);
+		glClear(GL_COLOR_BUFFER_BIT);
 		shaders.useProgram();
+
+		glm::mat4 proj = glm::mat4(1.0f);
+		proj = glm::perspective(glm::radians(45.0f), (float)720/480, 0.1f, 100.0f);
+		proj[3][3] = 1.0f;
+		glm::mat4 model = glm::mat4(1.0f);
+		//model = glm::rotate(model, glm::radians(-55.0f), glm::vec3(1.0f, 0.0f, 0.0f));
+		model[3][3] = 1.0f;
+
+		glm::mat4 view = glm::mat4(1.0f);
+		view = glm::translate(view, glm::vec3(0.0f, 0.0f, -300.0f));
+		view[3][3] = 1.0f;
+		glUniformMatrix4fv(glGetUniformLocation(shaders.program, "projection"), 1, GL_FALSE, &proj[0][0]);
+		glUniformMatrix4fv(glGetUniformLocation(shaders.program, "model"), 1, GL_FALSE, &model[0][0]);
+		glUniformMatrix4fv(glGetUniformLocation(shaders.program, "view"), 1, GL_FALSE, &view[0][0]);
 
 		glBindVertexArray(VAO);
 		glDrawElements(GL_TRIANGLES, indiceCount, GL_UNSIGNED_INT, 0);
@@ -91,6 +156,10 @@ void Engine::mainLoop()
 		glfwSwapBuffers(window);
 		glfwPollEvents();
 	}
+}
+
+void Engine::commands() {
+
 }
 
 // Cleans up after the engine
