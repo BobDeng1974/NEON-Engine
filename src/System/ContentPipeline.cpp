@@ -59,7 +59,7 @@ Mesh ContentPipeline::loadOBJ(char* path)
 				string** splits;
 				uint32_t count = 0;
 				word.split('/', splits, count);
-				std::cout << "First indice : " << splits[0]->length << std::endl;
+				std::cout << "First indice : " << splits[0]->characters << std::endl;
 			}
 		}
 	}
