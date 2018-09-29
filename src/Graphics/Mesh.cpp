@@ -1,9 +1,7 @@
 #include "Mesh.h"
 
-Mesh::Mesh(float* vertices, uint32_t* indices, uint32_t verticeCount, uint32_t indiceCount)
+Mesh::Mesh(float* vertices, float* normals, uint32_t* indices, uint32_t verticeCount, uint32_t normalCount, uint32_t indiceCount) :
+vertices(vertices), normals(normals), indices(indices), verticeCount(verticeCount), normalCount(normalCount), indiceCount(indiceCount)
 {
-	this->vertices = vertices;
-	this->indices = indices;
-	this->verticeCount = verticeCount;
-	this->indiceCount = indiceCount;
+	
 }

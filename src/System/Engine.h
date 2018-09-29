@@ -7,9 +7,13 @@ class Engine
 {
 	private:
 		ShaderProgram shaders;
+		glm::mat4 view;
 
 	public:
 		GLFWwindow* window;
+		float deltaTime;
+		float lastFrame;
+
 		uint32_t VAO;
 
 		void run();
@@ -18,6 +22,7 @@ class Engine
 
 		void mainLoop();
 		void commands();
+		void processInput(GLFWwindow* window);
 
 		void cleanup();
 };

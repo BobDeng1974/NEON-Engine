@@ -79,5 +79,5 @@ Mesh ContentPipeline::loadOBJ(char* path)
 		}
 	}
 	std::cout << vertices.length << "|" << indices.length;
-	return Mesh(vertices.array, indices.array, vertices.length, indices.length);
+	return Mesh(vertices.array, normals.array, indices.array, vertices.length, normals.length, indices.length);
 }
