@@ -46,7 +46,8 @@ Mesh ContentPipeline::loadOBJ(char* path)
 		if(!strcmp(word.data(), "v")) {
 			for(uint32_t i = 0; i < 3; i++) {
 				file >> word;
-				vertices.add(word.toFloat());
+				std::cout << word;
+				vertices.add(std::stof(word.characters));
 			}
 		}
 
@@ -55,13 +56,20 @@ Mesh ContentPipeline::loadOBJ(char* path)
 			// Iterate through face indices
 			for(uint32_t i = 0; i < 3; i++) {
 				file >> word;
-				std::cout << "Face : " << word.characters << std::endl;
+
 				string** splits;
 				uint32_t count = 0;
+
 				word.split('/', splits, count);
-				std::cout << "First indice : " << splits[0]->characters << std::endl;
+				std::cout << "Count : " << count << std::endl;
+				for(uint32_t i = 0; i < count; i++) 
+					std::cout << splits[i]->characters << "|";
+
+				std::cout << std::endl;
+				indices.add(splits[0]->toInt32() - 1);
 			}
 		}
 	}
+	std::cout << vertices.length << "|" << indices.length;
 	return Mesh(vertices.array, indices.array, vertices.length, indices.length);
 }

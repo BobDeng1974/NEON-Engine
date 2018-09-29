@@ -14,7 +14,7 @@ characters(new char[size]), length(0), size(size) {
 
 }
 
-string::string(char str[]) :
+string::string(char* str) :
 characters(str), length(getLength()), size(getLength()) {
 	
 }
@@ -45,7 +45,6 @@ void string::split(const char splitter, string**& splits, uint32_t& splitCount) 
 				continue;
 			} else {
 				splitCount++;
-				i++;
 				splitIndex = i;
 			}
 		}
@@ -60,11 +59,10 @@ void string::split(const char splitter, string**& splits, uint32_t& splitCount) 
 				splitIndex++;
 				continue;
 			} else {
-				splits[resultIndex] = new string(i - splitIndex);
+				splits[resultIndex] = new string(i - splitIndex + 1);
 				memcpy(splits[resultIndex]->characters, this->characters + splitIndex, i - splitIndex);
-				splits[resultIndex]->length = i - splitIndex;
-				splitIndex = i;
-				splitIndex++;
+				splits[resultIndex]->characters[i - splitIndex] = '\0';
+				splitIndex = i + 1;
 				resultIndex++;
 			}
 		}
@@ -190,13 +188,28 @@ bool string::operator!=(char*& str) {
 string& string::operator=(const string& str)
 {
 	delete characters;
-	characters = new char[str.length];
 
 	this->characters = str.characters;
 	this->length = str.length;
 	this->size = str.length;
+
+	return *this;
+}
+
+string& string::operator=(char* str) {
+	delete characters;
+
+	this->characters = str;
+	this->length = this->getLength();
+	this->size = this->getLength();
+
+	return *this;
 }
 
 char& string::operator[](std::size_t index) const {
 	return characters[index];
+}
+
+string::operator char*() {
+	return this->characters;
 }

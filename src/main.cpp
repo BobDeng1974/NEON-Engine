@@ -4,6 +4,8 @@
 #include <GLFW/glfw3.h>
 
 #include <iostream>
+#include <fstream>
+#include <cstring>
 
 #include "Engine.cpp"
 
@@ -12,12 +14,19 @@
 #ifdef TEST
 int main()
 {
-    string str = "ahoj dneska   je ale pekne pocasi     ze";
+    std::ifstream stream;
+    stream.open("./petr.txt");
+    if(!stream.is_open())
+        std::cout << "fuck";
+    string str;
+
+    //stream >> str;
+    std::cout << str;
 
     uint32_t count = 0;
     string** strings;
-    str.split(' ', strings, count);
-    std::cout << count;
+    str.split('/', strings, count);
+    std::cout << "pepa";
     for(uint32_t i = 0; i < count; i++)
         std::cout << strings[i]->characters;
 }

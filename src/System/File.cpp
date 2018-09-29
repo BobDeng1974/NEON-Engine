@@ -25,28 +25,6 @@ string File::getLine(std::ifstream& stream) {
 	return nullptr;
 }
 
-string File::getWord(std::ifstream& stream) {
-	std::size_t size = 50;
-	string output(size);
-
-	uint32_t index = 0;
-	while(true) {
-		char c;
-		stream.get(c);
-
-		if(c == ' ' || c == '\0')
-			break;
-		else {
-			if(output.length <= index) {
-				size += 25;
-				output.realloc(size);
-			}
-			std::cout << c;
-			output[index] = c;
-		}
-
-		index++;
-	}
-
-	return output;
+string File::getWord(std::ifstream& stream, char splitter) {
+	
 }

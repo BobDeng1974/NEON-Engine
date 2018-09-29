@@ -58,6 +58,7 @@ struct string
 		bool operator!=(char*& str);
 
 		string& operator=(const string& str);
+		string& operator=(char* str);
 
 		friend std::ostream& operator<<(std::ostream& stream, const string& str){
 			stream << str.characters;
@@ -70,7 +71,7 @@ struct string
 			return stream;
 		}
 
-		//operator char*() const;
+		operator char*();
 
 		char& operator[](std::size_t index) const;
 };

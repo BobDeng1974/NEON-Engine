@@ -18,6 +18,8 @@
 void framebuffer_size_callback(GLFWwindow* window, int width, int height);
 void processInput(GLFWwindow *window);
 
+uint32_t indiceCount = 0;
+
 void Engine::run()
 {
 	Debug::Message("Initializing OpenGL");
@@ -39,6 +41,7 @@ void Engine::initGL()
 	Debug::Message("Linking Program!");
 	shaders.linkProgram();
 	Mesh mesh = ContentPipeline::loadOBJ("/home/martin/Desktop/cube.obj");
+	indiceCount = mesh.indiceCount;
 
 	uint32_t VBO, EBO;
 	glGenVertexArrays(1, &VAO);
@@ -79,11 +82,11 @@ void Engine::mainLoop()
 	{
 		processInput(window);
 		glClearColor(0.2f, 0.3f, 0.3f, 1.0f);
-		glClear(GL_COLOR_BUFFER_BIT);
+		glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_TEST);
 		shaders.useProgram();
 
 		glBindVertexArray(VAO);
-		glDrawElements(GL_TRIANGLES, 6, GL_UNSIGNED_INT, 0);
+		glDrawElements(GL_TRIANGLES, indiceCount, GL_UNSIGNED_INT, 0);
 
 		glfwSwapBuffers(window);
 		glfwPollEvents();
