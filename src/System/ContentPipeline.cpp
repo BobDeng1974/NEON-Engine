@@ -21,11 +21,13 @@ char* ContentPipeline::LoadShader(char* path)
 		Debug::Error("Shader file couldn't be opened!");
 
 	uint32_t size = file.tellg();
-	char* shader = new char[size];
+	char* shader = new char[size + 1];
 	file.seekg(0);
 
 	file.read(shader, size);
 	file.close();
+
+	shader[size] = '\0';
 
 	return shader;
 }
@@ -56,7 +58,7 @@ Mesh ContentPipeline::loadOBJ(char* path)
 		if(!strcmp(word.data(), "vn")) {
 			for(uint32_t i = 0; i < 3; i++) {
 				file >> word;
-				vertices.add(std::stof(word.characters));
+				_normals.add(std::stof(word.characters));
 			}
 		}
 
@@ -71,13 +73,10 @@ Mesh ContentPipeline::loadOBJ(char* path)
 
 				word.split('/', splits, count);
 
-				if(count == 2) {
-					indices.add(std::stoul(splits[0]->characters) - 1);
-					normals.add(_normals[std::stoi(splits[1]->characters) - 1]);
-				}
+				indices.add(std::stoul(splits[0]->characters) - 1);
+				normals.add(_normals[std::stoi(splits[1]->characters) - 1 + i]);
 			}
 		}
 	}
-	std::cout << vertices.length << "|" << indices.length;
 	return Mesh(vertices.array, normals.array, indices.array, vertices.length, normals.length, indices.length);
 }

@@ -38,8 +38,10 @@ void Engine::run()
 
 void Engine::initGL()
 {
+	glEnable(GL_DEPTH_TEST);
 	view = glm::mat4(1.0f);
 	view = glm::translate(view, glm::vec3(0.0f, 0.0f, -300.0f));
+	glm::vec3 viewPos(0.0f, 0.0f, -300.0f);
 	view[3][3] = 1.0f;
 
 	shaders = ShaderProgram();
@@ -58,21 +60,24 @@ void Engine::initGL()
 
 	glBindVertexArray(VAO);
 
+	std::cout << mesh.verticeCount;
+
 	glBindBuffer(GL_ARRAY_BUFFER, VBO);
-	glBufferData(GL_ARRAY_BUFFER, sizeof(float) * (mesh.verticeCount + mesh.normalCount), nullptr, GL_DYNAMIC_DRAW);
+	glBufferData(GL_ARRAY_BUFFER, sizeof(float) * (mesh.verticeCount), mesh.vertices, GL_DYNAMIC_DRAW);
 
 	glBufferSubData(GL_ARRAY_BUFFER, 0, sizeof(float) * mesh.verticeCount, mesh.vertices);
-	glBufferSubData(GL_ARRAY_BUFFER, sizeof(float) * mesh.verticeCount, sizeof(float) * mesh.normalCount, mesh.normals);
+	glBufferSubData(GL_ARRAY_BUFFER, mesh.verticeCount * sizeof(float), sizeof(float) * mesh.normalCount, mesh.normals);
 
 	glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, EBO);
 	glBufferData(GL_ELEMENT_ARRAY_BUFFER, sizeof(uint32_t) * mesh.indiceCount, mesh.indices, GL_DYNAMIC_DRAW);
 
 	glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 3 * sizeof(float), (void*)0);
-	glVertexAttribPointer(1, 3, GL_FLOAT, GL_FALSE, 3 * sizeof(float), (void*)0);
+	glVertexAttribPointer(1, 3, GL_FLOAT, GL_FALSE, 3 * sizeof(float), (void*)(mesh.verticeCount * sizeof(float)));
 	glEnableVertexAttribArray(0);
-	glEnableVertexAttribArray(1);
+	//glEnableVertexAttribArray(1);
 
 	glBindBuffer(GL_ARRAY_BUFFER, 0);
+	//glPolygonMode(GL_FRONT_AND_BACK, GL_LINE);
 }
 
 // Loop of the game engine
@@ -87,21 +92,20 @@ void Engine::mainLoop()
 
 		processInput(window);
 		glClearColor(0.2f, 0.3f, 0.3f, 1.0f);
-		glClear(GL_COLOR_BUFFER_BIT);
+		glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 		shaders.useProgram();
 
 		glm::mat4 proj = glm::mat4(1.0f);
 		proj = glm::perspective(glm::radians(45.0f), (float)720/480, 0.1f, 100.0f);
 		proj[3][3] = 1.0f;
 		glm::mat4 model = glm::mat4(1.0f);
-		//model = glm::rotate(model, glm::radians(-55.0f), glm::vec3(1.0f, 0.0f, 0.0f));
 		model[3][3] = 1.0f;
 
 		glUniformMatrix4fv(glGetUniformLocation(shaders.program, "projection"), 1, GL_FALSE, &proj[0][0]);
 		glUniformMatrix4fv(glGetUniformLocation(shaders.program, "model"), 1, GL_FALSE, &model[0][0]);
 		glUniformMatrix4fv(glGetUniformLocation(shaders.program, "view"), 1, GL_FALSE, &view[0][0]);
-
-		glm::vec3 lightPos(1.0f, 1.0f, 1.0f);
+		glUniform3fv(glGetUniformLocation(shaders.program, "viewPos"), 1, &glm::inverse(view)[0][3]);
+		glm::vec3 lightPos(1.0f, 1.0f, 1.0f);  
 		glUniform3fv(glGetUniformLocation(shaders.program, "lightPos"), 1, &lightPos[0]);
 
 		material.uniform(shaders.program);
@@ -132,20 +136,20 @@ void Engine::processInput(GLFWwindow *window) {
         glfwSetWindowShouldClose(window, true);
 
 	if(glfwGetKey(window, GLFW_KEY_SPACE) == GLFW_PRESS) {
-		view = glm::translate(view, glm::vec3(0.0f, -10.0f * deltaTime, 0.0f));
+		view = glm::translate(view, glm::vec3(0.0f, -50.0f * deltaTime, 0.0f));
 	}
 
 	if(glfwGetKey(window, GLFW_KEY_W) == GLFW_PRESS) {
-		view = glm::translate(view, glm::vec3(0.0f, 0.0f, 5.0f * deltaTime));
+		view = glm::translate(view, glm::vec3(0.0f, 0.0f, 50.0f * deltaTime));
 	}
 	if(glfwGetKey(window, GLFW_KEY_S) == GLFW_PRESS) {
-		view = glm::translate(view, glm::vec3(0.0f, 0.0f, -5.0f * deltaTime));
+		view = glm::translate(view, glm::vec3(0.0f, 0.0f, -50.0f * deltaTime));
 	}
 	if(glfwGetKey(window, GLFW_KEY_A) == GLFW_PRESS) {
-		view = glm::translate(view, glm::vec3(5.0f * deltaTime, 0.0f, 0.0f));
+		view = glm::translate(view, glm::vec3(50.0f * deltaTime, 0.0f, 0.0f));
 	}
 	if(glfwGetKey(window, GLFW_KEY_D) == GLFW_PRESS) {
-		view = glm::translate(view, glm::vec3(-5.0f * deltaTime, 0.0f, 0.0f));
+		view = glm::translate(view, glm::vec3(-50.0f * deltaTime, 0.0f, 0.0f));
 	}
 }
 
