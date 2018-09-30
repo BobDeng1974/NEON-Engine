@@ -1,5 +1,3 @@
-//#define TEST
-
 #include <glad/glad.h>
 #include <GLFW/glfw3.h>
 
@@ -9,28 +7,6 @@
 
 #include "Engine.cpp"
 
-// Main method containing all the code that needs to be defined globally
-// =====================================================================
-#ifdef TEST
-int main()
-{
-    std::ifstream stream;
-    stream.open("./petr.txt");
-    if(!stream.is_open())
-        std::cout << "fuck";
-    string str;
-
-    //stream >> str;
-    std::cout << str;
-
-    uint32_t count = 0;
-    string** strings;
-    str.split('/', strings, count);
-    std::cout << "pepa";
-    for(uint32_t i = 0; i < count; i++)
-        std::cout << strings[i]->characters;
-}
-#else
 int main()
 {
     glfwInit();
@@ -66,4 +42,3 @@ int main()
 	engine.window = window; // Sets the window pointer
 	engine.run(); // Runs the engine
 }
-#endif

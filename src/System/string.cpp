@@ -35,6 +35,14 @@ bool string::startsWith(string* token) {
 	return true;
 }
 
+bool string::startsWith(char* token) {
+	for(uint32_t i = 0; i < this->length; i++)
+		if(token[i] != this->get(i))
+			return false;
+
+	return true;
+}
+
 void string::split(const char splitter, string**& splits, uint32_t& splitCount) {
 	// Gets number of splits
 	uint32_t splitIndex = 0;

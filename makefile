@@ -7,7 +7,7 @@ DEFINE = -DWIDTH=720 -DHEIGHT=480
 build:
 	g++ $(PROJECT_INCLUDE) $(ASSETS) -o'NEON Engine' src/main.cpp $(GLFW_COMMANDS)
 debug:
-	g++ -Wall -DDEBUG $(GLAD) $(PROJECT_INCLUDE) -o'NEON Engine' src/main.cpp $(GLFW_COMMANDS)
+	g++ -Wall -DDEBUG $(DEFINE) $(GLAD) $(PROJECT_INCLUDE) -o'NEON Engine' src/main.cpp $(GLFW_COMMANDS)
 
 test: debug
 	clear 

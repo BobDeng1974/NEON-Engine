@@ -1,8 +1,6 @@
 #define WIDTH 720
 #define HEIGHT 480
 
-#define __ASSETS__ "/home/martin/Projects/NEON Engine/assets"
-
 #include <glad/glad.h>
 #include <GLFW/glfw3.h>
 
@@ -50,7 +48,7 @@ void Engine::initGL()
 
 	Debug::Message("Linking Program!");
 	shaders.linkProgram();
-	Mesh mesh = ContentPipeline::loadOBJ("/home/martin/Desktop/monu10.obj");
+	Mesh mesh = ContentPipeline::loadOBJ("/home/martin/Desktop/cube.obj");
 	indiceCount = mesh.indiceCount;
 
 	uint32_t VBO, EBO;
@@ -59,8 +57,6 @@ void Engine::initGL()
 	glGenBuffers(1, &EBO);
 
 	glBindVertexArray(VAO);
-
-	std::cout << mesh.verticeCount;
 
 	glBindBuffer(GL_ARRAY_BUFFER, VBO);
 	glBufferData(GL_ARRAY_BUFFER, sizeof(float) * (mesh.verticeCount), mesh.vertices, GL_DYNAMIC_DRAW);
@@ -74,7 +70,7 @@ void Engine::initGL()
 	glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 3 * sizeof(float), (void*)0);
 	glVertexAttribPointer(1, 3, GL_FLOAT, GL_FALSE, 3 * sizeof(float), (void*)(mesh.verticeCount * sizeof(float)));
 	glEnableVertexAttribArray(0);
-	//glEnableVertexAttribArray(1);
+	glEnableVertexAttribArray(1);
 
 	glBindBuffer(GL_ARRAY_BUFFER, 0);
 	//glPolygonMode(GL_FRONT_AND_BACK, GL_LINE);
@@ -119,7 +115,16 @@ void Engine::mainLoop()
 }
 
 void Engine::commands() {
+	std::cout << std::endl << "Type in commands : " << std::endl;
+	while(glfwWindowShouldClose(window)) {
+		string command;
+		std::cin >> command;
 
+		if(command.startsWith("load")) {
+			std::cin >> command;
+			
+		}
+	}
 }
 
 // Cleans up after the engine

@@ -38,7 +38,6 @@ Mesh ContentPipeline::loadOBJ(char* path)
 	if(!file.is_open())
 		Debug::Error("Couldn't open OBJ file!");
 
-	Debug::Message("pepa");
 	Array<float> vertices(60);
 	Array<float> _normals(60);
 

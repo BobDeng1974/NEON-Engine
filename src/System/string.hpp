@@ -21,6 +21,7 @@ struct string
 
 		// Determine if string starts with specified token
 		bool startsWith(string* token);
+		bool startsWith(char* token);
 
 		// Splits string
 		void split(const char splitter, string**& splits, uint32_t& splitCount);
