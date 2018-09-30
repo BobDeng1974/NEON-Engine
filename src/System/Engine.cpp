@@ -36,6 +36,11 @@ void Engine::run()
 
 void Engine::initGL()
 {
+	string path;
+
+	std::cout << std::endl << "Please input path to .OBJ file you want to load and render : " << std::endl;
+	std::cin >> path;
+
 	glEnable(GL_DEPTH_TEST);
 	view = glm::mat4(1.0f);
 	view = glm::translate(view, glm::vec3(0.0f, 0.0f, -300.0f));
@@ -48,7 +53,7 @@ void Engine::initGL()
 
 	Debug::Message("Linking Program!");
 	shaders.linkProgram();
-	Mesh mesh = ContentPipeline::loadOBJ("/home/martin/Desktop/cube.obj");
+	Mesh mesh = ContentPipeline::loadOBJ(path);
 	indiceCount = mesh.indiceCount;
 
 	uint32_t VBO, EBO;
