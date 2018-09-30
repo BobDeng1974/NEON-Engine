@@ -14,6 +14,8 @@ class Engine
 		float deltaTime;
 		float lastFrame;
 
+		string assets;
+
 		uint32_t VAO;
 
 		void run();

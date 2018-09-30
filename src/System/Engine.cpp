@@ -48,8 +48,8 @@ void Engine::initGL()
 	view[3][3] = 1.0f;
 
 	shaders = ShaderProgram();
-	shaders.addShader(GL_VERTEX_SHADER, ContentPipeline::LoadShader("/home/martin/Projects/NEONEngine/assets/Shaders/defaultVertexShader.glsl"));
-	shaders.addShader(GL_FRAGMENT_SHADER, ContentPipeline::LoadShader("/home/martin/Projects/NEONEngine/assets/Shaders/defaultFragmentShader.glsl"));
+	shaders.addShader(GL_VERTEX_SHADER, ContentPipeline::LoadShader("././assets/Shaders/defaultVertexShader.glsl"));
+	shaders.addShader(GL_FRAGMENT_SHADER, ContentPipeline::LoadShader("././assets/Shaders/defaultFragmentShader.glsl"));
 
 	Debug::Message("Linking Program!");
 	shaders.linkProgram();

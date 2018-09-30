@@ -7,7 +7,7 @@
 
 #include "Engine.cpp"
 
-int main()
+int main(int argc, char* args[])
 {
     glfwInit();
     glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, 4);
@@ -37,8 +37,11 @@ int main()
         return -1;
     }
 
+    //std::cout << args[0];
+
     // Initialize the engine
 	Engine engine;
+    engine.assets = args[0];
 	engine.window = window; // Sets the window pointer
 	engine.run(); // Runs the engine
 }
