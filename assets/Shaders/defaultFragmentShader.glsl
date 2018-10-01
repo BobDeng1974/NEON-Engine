@@ -11,6 +11,17 @@ struct Material {
     vec3 specular;
 };
 
+struct Light {
+    int type;
+
+    vec3 position;
+    vec3 direction;
+
+    vec3 ambient;
+    vec3 diffuse;
+    vec3 specular;
+}
+
 uniform Material material;
 
 void main()
@@ -34,4 +45,8 @@ void main()
 
     vec3 result = (ambient + diffuse + specular) * vec3(0.2, 0.3, 0.5);
     FragColor = vec4(result, 1.0);
+}
+
+vec3 calculateDirectionLight(vec3 direction) {
+
 }
