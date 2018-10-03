@@ -6,9 +6,13 @@ mv ./glad /usr/include
 
 printf '\033[0;34m Finished Installing GLAD\n'
 
-mkdir $HOME'/NEON Engine'
-mv ./assets $HOME'/NEON Engine/'
-mv 'NEON Engine' $HOME'/NEON Engine/'
+make build
+
+mkdir $HOME'/NEONEngine'
+mv ./assets $HOME'/NEONEngine/'
+mv 'NEONEngine' $HOME'/NEONEngine/'
+
+mkdir $HOME'/NEONEngine/projects/'
 
 printf '\033[0;34m Engine Installation successfully finished!'
 
