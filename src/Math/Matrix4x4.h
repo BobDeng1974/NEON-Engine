@@ -13,8 +13,8 @@ struct Matrix4x4 {
 		Vector3 scale() const;
 
 		Matrix4x4();
-		Matrix4x4(const float value);
-		Matrix4x4(const float* values);
+		Matrix4x4(const float& value);
+		Matrix4x4(const float*& values);
 
 		void translate(const Vector3& translation);
 		void translate(const Vector4& translation);
@@ -27,6 +27,15 @@ struct Matrix4x4 {
 		void scale(const Vector3& scale);
 		void scale(const Vector4& scale);
 		void scale(const float x, const float y, const float z);
+
+		Matrix4x4 operator+(const float& value);
+		Matrix4x4 operator+(const Matrix4x4& other);
+
+		Matrix4x4 operator-(const float& value);
+		Matrix4x4 operator-(const Matrix4x4& other);
+
+		Matrix4x4 operator*(const float& value);
+		Matrix4x4 operator*(const Matrix4x4& other);
 };
 
 namespace Matrix {

@@ -20,21 +20,25 @@ struct Vector4 {
 		void calculateMagnitude();
 		void normalize();
 
-		Vector4 normalized();
+		Vector4* normalized();
 
-		float dot();
-		Vector4 cross(Vector4 vector);
+		float dot(Vector4& other);
+		Vector4* cross(const Vector4& vector);
 
+		Vector4& operator+(const Vector3& vector);
 		Vector4& operator+(const Vector4& vector);
 		Vector4& operator+(const float& value);
 
 		Vector4& operator-(const Vector4& vector);
+		Vector4& operator-(const Vector3& vector);
 		Vector4& operator-(const float& value);
 
 		Vector4& operator*(const Vector4& vector);
+		Vector4& operator*(const Vector3& vector);
 		Vector4& operator*(const float& value);
 
 		Vector4& operator/(const Vector4& vector);
+		Vector4& operator/(const Vector3& vector);
 		Vector4& operator/(const float& value);
 
 		Vector4& operator=(const Vector4& vector);
