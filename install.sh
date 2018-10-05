@@ -2,11 +2,17 @@
 printf '\033[0;34m Installation Started!\n'
 printf '\033[0;34m Installing GLAD\n\033[0;31m'
 
-mv ./GLAD/glad /usr/include
-mv ./GLAD/KHR /usr/include
+mv ./libs/GLAD/glad /usr/include
+mv ./libs/GLAD/KHR /usr/include
 
 printf '\033[0;34m Finished Installing GLAD\n'
+printf '\033[0;34m Installing GLFW'
 
+cmake libs/GLFW/.
+cd libs/GLFW/
+make install
+
+printf '\033[0;34m Finished Installing GLFW'
 #make build
 
 #mkdir $HOME'/NEONEngine'

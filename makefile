@@ -1,4 +1,4 @@
-GLFW_COMMANDS = -lglfw3 -lGL -lX11 -lpthread -lXrandr -lXi -ldl
+GLFW_COMMANDS = -lglfw3 -lGL -lX11 -lpthread -lXrandr -lXi -ldl -lXcursor -lXinerama -lXxf86vm -L/user/lib/x86_64-linux-gnu/
 GLAD = ./src/glad.c
 
 PROJECT_INCLUDE = -I./src/Graphics -I./src/System -I./src/ -I./src/Math -I./glad/
